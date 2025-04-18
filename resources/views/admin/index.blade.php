@@ -1,0 +1,1 @@
+<h1>iini adalah halaman index admin</h1>
