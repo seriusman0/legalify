@@ -3,12 +3,17 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('users', UserController::class);
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/blog', [BlogController::class, 'blog'])->name('user.blog');
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('blogs', BlogController::class);
+});
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login']);
