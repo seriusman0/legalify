@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
+            $table->string('category')->default('Uncategorized');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

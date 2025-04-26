@@ -4,120 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Legalify</title>
-    <link rel="stylesheet" href="{{ asset('assets/template/css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/stack-interface.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/socicon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/lightbox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/flickity.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/iconsmind.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/jquery.steps.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/template/css/font-roboto.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700%7CMerriweather:300,300i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Template CSS -->
+    <link href="{{ asset('assets/template/css/theme.css') }}" rel="stylesheet">
+    
+    @stack('css')
 </head>
 <body>
-    <a id="start"></a>
+    <!-- Navigation -->
     <div class="nav-container">
-        <div class="bar bar--sm visible-xs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <a href="{{ url('/') }}">
-                            <img class="logo logo-dark" alt="logo" src="{{ asset('assets/icons/legalifylogo.png') }}" />
-                            <img class="logo logo-light" alt="logo" src="{{ asset('assets/icons/legalifylogo.png') }}" />
-                        </a>
-                    </div>
-                    <div class="col-9 col-md-10 text-right">
-                        <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs">
-                            <i class="icon icon--sm stack-interface stack-menu"></i>
-                        </a>
-                    </div>
+        <div class="container">
+            <nav class="d-flex justify-content-between align-items-center py-3">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="logo">
+                </a>
+                <div class="d-none d-lg-block">
+                    <ul class="menu-horizontal">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('about') }}">About</a></li>
+                        <li><a href="{{ route('services') }}">Services</a></li>
+                        <li><a href="{{ route('user.blog') }}">Blog</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                    </ul>
                 </div>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Navigation -->
+        <div class="collapse" id="mobileNav">
+            <div class="container py-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('user.blog') }}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+                </ul>
             </div>
         </div>
-        <nav id="menu1" class="bar bar--sm bar-1 hidden-xs bar--absolute bar--transparent">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-1 col-md-2 hidden-xs">
-                        <div class="bar__module">
-                            <a href="{{ url('/') }}">
-                                <img class="logo logo-dark" alt="logo" src="{{ asset('assets/icons/legalifylogo.png') }}" />
-                                <img class="logo logo-light" alt="logo" src="{{ asset('assets/icons/legalifylogo.png') }}" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
-                        <div class="bar__module">
-                            <ul class="menu-horizontal text-left">
-                                <li><a href="{{ route('home') }}">Home</a></li>        
-                                <li><a href="{{ route('user.blog') }}">Blog</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
     </div>
-    <div class="main-container">
+
+    <main>
         @yield('content')
-    </div>
-    <footer class="space--sm footer-1 text-center-xs">
+    </main>
+
+    <footer class="space--sm">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline list--hover">
-                        <li><a href="#">Our Company</a></li>
-                        <li><a href="#">Locations</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Work With Us</a></li>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-4">About Legalify</h5>
+                    <p>Professional legal services tailored to your needs. Our experienced team is here to help you navigate complex legal matters with confidence.</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-4">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> andreassina9a@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 851-7301-0820</li>
                     </ul>
                 </div>
-                <div class="col-md-6 text-right text-center-xs">
-                    <ul class="social-list list-inline list--hover">
-                        <li><a href="#"><i class="socicon socicon-google icon icon--xs"></i></a></li>
-                        <li><a href="#"><i class="socicon socicon-twitter icon icon--xs"></i></a></li>
-                        <li><a href="#"><i class="socicon socicon-facebook icon icon--xs"></i></a></li>
-                        <li><a href="#"><i class="socicon socicon-instagram icon icon--xs"></i></a></li>
+                <div class="col-md-4">
+                    <h5 class="mb-4">Follow Us</h5>
+                    <ul class="social-list">
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                     </ul>
-                    <a href="#" class="btn type--uppercase">
-                        <span class="btn__text">
-                            Contact Us
-                        </span>
-                    </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <img alt="Image" class="logo" src="{{ asset('assets/icons/legalifylogoblack.png') }}" />
-                    <span class="type--fine-print">&copy;
-                        <span class="update-year"></span> Legalify Inc.</span>
-                    <a class="type--fine-print" href="#">Privacy Policy</a>
-                    <a class="type--fine-print" href="#">Legal</a>
+            <hr class="mt-4 mb-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
+                <div class="mt-2 small text-muted">
+                    <p class="mb-1">Image Credits:</p>
+                    <p class="mb-1"><a href="https://www.freepik.com/free-photo/closeup-shot-person-writing-book-with-gavel-table_25928542.htm">Legal writing image by wirestock on Freepik</a></p>
+                    <p class="mb-1"><a href="https://www.freepik.com/free-photo/visa-application-form-composition_18895521.htm">Legal documents image by freepik</a></p>
                 </div>
             </div>
         </div>
     </footer>
-    <a class="back-to-top inner-link" href="#start" data-scroll-class="100vh:active">
-        <i class="stack-interface stack-up-open-big"></i>
-    </a>
-    <script src="{{ asset('assets/template/js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/flickity.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/easypiechart.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/parallax.js') }}"></script>
-    <script src="{{ asset('assets/template/js/typed.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/template/js/isotope.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/ytplayer.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/lightbox.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/granim.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/countdown.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/twitterfetcher.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/spectragram.min.js') }}"></script>
-    <script src="{{ asset('assets/template/js/smooth-scroll.min.js') }}"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/template/js/scripts.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

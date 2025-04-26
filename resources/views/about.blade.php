@@ -1,0 +1,163 @@
+@extends('layouts.app')
+
+@section('title', 'About Us')
+
+@section('content')
+<!-- Header -->
+<section class="cover">
+<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal1.jpg') }});"></div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 text-white mb-4">About Legalify</h1>
+                <p class="lead text-white">Your Trusted Legal Partner for Success</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="space--sm">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{{ asset('assets/icons/logo2.jpeg') }}" alt="About Legalify" class="img-fluid rounded shadow-lg">
+            </div>
+            <div class="col-lg-6">
+                <div class="feature">
+                    <h2 class="mb-4">Our Story</h2>
+                    <p class="lead mb-4">Founded with a vision to make legal services more accessible and transparent, Legalify has grown to become a trusted name in the legal industry.</p>
+                    <p>We combine years of legal expertise with modern technology to provide efficient and effective legal solutions for our clients. Our commitment to excellence and client satisfaction has made us a preferred choice for businesses and individuals alike.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values -->
+        <div class="row mt-5">
+            <div class="col-12 text-center mb-5">
+                <h2>Our Core Values</h2>
+                <p class="lead">The principles that guide our practice</p>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-balance-scale fa-3x text-primary"></i>
+                    </div>
+                    <h3>Integrity</h3>
+                    <p>We maintain the highest ethical standards in all our dealings, ensuring transparency and honesty in every interaction.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-handshake fa-3x text-primary"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We strive for excellence in every aspect of our work, delivering high-quality legal services consistently.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-users fa-3x text-primary"></i>
+                    </div>
+                    <h3>Client Focus</h3>
+                    <p>Our clients' success is our priority. We work tirelessly to achieve the best possible outcomes for them.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="row mt-5">
+            <div class="col-12 text-center mb-5">
+                <h2>Our Leadership Team</h2>
+                <p class="lead">Meet the experts behind our success</p>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
+                    <h3>John Doe</h3>
+                    <p class="text-primary mb-2">Managing Partner</p>
+                    <p>Specializing in Corporate Law with over 15 years of experience.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <img src="{{ asset('assets/template/img/accom-3.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
+                    <h3>Jane Smith</h3>
+                    <p class="text-primary mb-2">Senior Partner</p>
+                    <p>Expert in Intellectual Property Law and Technology.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="feature text-center">
+                    <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
+                    <h3>Mike Johnson</h3>
+                    <p class="text-primary mb-2">Head of Litigation</p>
+                    <p>Specialized in Complex Commercial Litigation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cover">
+<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal2.jpg') }});"></div>
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="display-4 text-white mb-4">Ready to Work Together?</h2>
+                <p class="lead text-white mb-4">Let's discuss how we can help you achieve your legal objectives.</p>
+                <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Contact Us
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@push('css')
+<style>
+.background-image-holder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.cover .container {
+    position: relative;
+    z-index: 2;
+}
+
+.feature {
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.text-primary {
+    color: #4a90e2 !important;
+}
+
+.rounded-circle {
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+</style>
+@endpush
+@endsection

@@ -25,6 +25,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{ old('category') }}" required>
+                            @error('category')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="image">Image</label>
                             <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image">
                             @error('image')

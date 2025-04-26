@@ -1,29 +1,45 @@
 <?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RoleAndPermissionSeeder extends Seeder
+class RoleAndPermissionsSeeder extends Seeder
 {
     public function run()
     {
-        // Buat Permission
-        Permission::create(['name' => 'create-users']);
-        Permission::create(['name' => 'edit-users']);
-        Permission::create(['name' => 'delete-users']);
+        // Create Permissions
+        Permission::create(['name' => 'create blogs']);
+        Permission::create(['name' => 'edit blogs']);
+        Permission::create(['name' => 'delete blogs']);
+        Permission::create(['name' => 'publish blogs']);
+        Permission::create(['name' => 'manage users']);
 
-        // Buat Role
+        // Create Roles
         $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
+        $editorRole = Role::create(['name' => 'editor']);
+        $authorRole = Role::create(['name' => 'author']);
 
-        // Assign Permission ke Role
+        // Assign Permissions to Roles
         $adminRole->givePermissionTo([
-            'create-users',
-            'edit-users',
-            'delete-users'
+            'create blogs',
+            'edit blogs',
+            'delete blogs',
+            'publish blogs',
+            'manage users'
         ]);
 
-        $userRole->givePermissionTo([
-            'edit-users'
+        $editorRole->givePermissionTo([
+            'create blogs',
+            'edit blogs',
+            'publish blogs'
+        ]);
+
+        $authorRole->givePermissionTo([
+            'create blogs',
+            'edit blogs'
         ]);
     }
 }
