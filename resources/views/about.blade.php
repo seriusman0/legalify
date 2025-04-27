@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
+@section('title', 'Tentang Kami')
 
 @section('content')
 <!-- Header -->
@@ -9,8 +9,8 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 class="display-4 text-white mb-4">About Legalify</h1>
-                <p class="lead text-white">Your Trusted Legal Partner for Success</p>
+                <h1 class="display-4 text-white mb-4">Tentang Legalify</h1>
+                <p class="lead text-white">Partner Hukum Terpercaya untuk Kesuksesan Anda</p>
             </div>
         </div>
     </div>
@@ -25,9 +25,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="feature">
-                    <h2 class="mb-4">Our Story</h2>
-                    <p class="lead mb-4">Founded with a vision to make legal services more accessible and transparent, Legalify has grown to become a trusted name in the legal industry.</p>
-                    <p>We combine years of legal expertise with modern technology to provide efficient and effective legal solutions for our clients. Our commitment to excellence and client satisfaction has made us a preferred choice for businesses and individuals alike.</p>
+                    <h2 class="mb-4">Cerita Kami</h2>
+                    <p class="lead mb-4">Didirikan dengan visi untuk membuat layanan hukum lebih mudah diakses dan transparan, Legalify telah berkembang menjadi nama yang dipercaya di industri hukum.</p>
+                    <p>Kami menggabungkan pengalaman bertahun-tahun dalam bidang hukum dengan teknologi modern untuk memberikan solusi hukum yang efisien dan efektif bagi klien kami. Komitmen kami terhadap keunggulan dan kepuasan klien telah menjadikan kami pilihan utama bagi bisnis dan individu.</p>
                 </div>
             </div>
         </div>
@@ -35,8 +35,8 @@
         <!-- Values -->
         <div class="row mt-5">
             <div class="col-12 text-center mb-5">
-                <h2>Our Core Values</h2>
-                <p class="lead">The principles that guide our practice</p>
+                <h2>Nilai-Nilai Utama Kami</h2>
+                <p class="lead">Prinsip-prinsip yang memandu praktik kami</p>
             </div>
             
             <div class="col-md-4 mb-4">
@@ -44,8 +44,8 @@
                     <div class="mb-4">
                         <i class="fas fa-balance-scale fa-3x text-primary"></i>
                     </div>
-                    <h3>Integrity</h3>
-                    <p>We maintain the highest ethical standards in all our dealings, ensuring transparency and honesty in every interaction.</p>
+                    <h3>Integritas</h3>
+                    <p>Kami menjunjung tinggi standar etika dalam setiap urusan, memastikan transparansi dan kejujuran dalam setiap interaksi.</p>
                 </div>
             </div>
 
@@ -54,8 +54,8 @@
                     <div class="mb-4">
                         <i class="fas fa-handshake fa-3x text-primary"></i>
                     </div>
-                    <h3>Excellence</h3>
-                    <p>We strive for excellence in every aspect of our work, delivering high-quality legal services consistently.</p>
+                    <h3>Keunggulan</h3>
+                    <p>Kami berusaha untuk mencapai keunggulan dalam setiap aspek pekerjaan kami, memberikan layanan hukum berkualitas tinggi secara konsisten.</p>
                 </div>
             </div>
 
@@ -64,8 +64,8 @@
                     <div class="mb-4">
                         <i class="fas fa-users fa-3x text-primary"></i>
                     </div>
-                    <h3>Client Focus</h3>
-                    <p>Our clients' success is our priority. We work tirelessly to achieve the best possible outcomes for them.</p>
+                    <h3>Fokus pada Klien</h3>
+                    <p>Kesuksesan klien adalah prioritas kami. Kami bekerja tanpa lelah untuk mencapai hasil terbaik bagi mereka.</p>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@
         <!-- Team -->
         <div class="row mt-5">
             <div class="col-12 text-center mb-5">
-                <h2>Our Leadership Team</h2>
-                <p class="lead">Meet the experts behind our success</p>
+                <h2>Tim Kepemimpinan Kami</h2>
+                <p class="lead">Kenali para ahli di balik kesuksesan kami</p>
             </div>
             
             <div class="col-md-4 mb-4">
@@ -82,7 +82,7 @@
                     <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
                     <h3>John Doe</h3>
                     <p class="text-primary mb-2">Managing Partner</p>
-                    <p>Specializing in Corporate Law with over 15 years of experience.</p>
+                    <p>Spesialis Hukum Perusahaan dengan pengalaman lebih dari 15 tahun.</p>
                 </div>
             </div>
 
@@ -91,7 +91,7 @@
                     <img src="{{ asset('assets/template/img/accom-3.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
                     <h3>Jane Smith</h3>
                     <p class="text-primary mb-2">Senior Partner</p>
-                    <p>Expert in Intellectual Property Law and Technology.</p>
+                    <p>Ahli dalam Hukum Kekayaan Intelektual dan Teknologi.</p>
                 </div>
             </div>
 
@@ -99,8 +99,8 @@
                 <div class="feature text-center">
                     <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
                     <h3>Mike Johnson</h3>
-                    <p class="text-primary mb-2">Head of Litigation</p>
-                    <p>Specialized in Complex Commercial Litigation.</p>
+                    <p class="text-primary mb-2">Kepala Litigasi</p>
+                    <p>Spesialis dalam Litigasi Komersial Kompleks.</p>
                 </div>
             </div>
         </div>
@@ -113,10 +113,10 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2 class="display-4 text-white mb-4">Ready to Work Together?</h2>
-                <p class="lead text-white mb-4">Let's discuss how we can help you achieve your legal objectives.</p>
+                <h2 class="display-4 text-white mb-4">Siap Bekerja Sama?</h2>
+                <p class="lead text-white mb-4">Mari diskusikan bagaimana kami dapat membantu Anda mencapai tujuan hukum Anda.</p>
                 <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-                    <i class="fas fa-paper-plane me-2"></i>Contact Us
+                    <i class="fas fa-paper-plane me-2"></i>Hubungi Kami
                 </a>
             </div>
         </div>

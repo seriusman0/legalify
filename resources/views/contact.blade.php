@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us')
+@section('title', 'Hubungi Kami')
 
 @section('content')
 <!-- Header -->
@@ -9,8 +9,8 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 class="display-4 text-white mb-4">Contact Us</h1>
-                <p class="lead text-white">Get in touch with our legal experts today</p>
+                <h1 class="display-4 text-white mb-4">Hubungi Kami</h1>
+                <p class="lead text-white">Hubungi tim ahli hukum kami hari ini</p>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <!-- Contact Information -->
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <div class="feature">
-                    <h3 class="mb-4">Get In Touch</h3>
+                    <h3 class="mb-4">Informasi Kontak</h3>
                     <ul class="list-unstyled">
                         <li class="mb-4">
                             <div class="d-flex">
@@ -31,7 +31,7 @@
                                     <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h5>Visit Us</h5>
+                                    <h5>Alamat Kami</h5>
                                     <p class="mb-0">123 Legal Street, Business District<br>Jakarta, Indonesia</p>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                     <i class="fas fa-phone fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h5>Call Us</h5>
+                                    <h5>Telepon</h5>
                                     <p class="mb-0">+62 851-7301-0820</p>
                                 </div>
                             </div>
@@ -53,14 +53,14 @@
                                     <i class="fas fa-envelope fa-2x text-primary"></i>
                                 </div>
                                 <div>
-                                    <h5>Email Us</h5>
+                                    <h5>Email</h5>
                                     <p class="mb-0">andreassina9a@gmail.com</p>
                                 </div>
                             </div>
                         </li>
                     </ul>
 
-                    <h3 class="mb-4 mt-5">Follow Us</h3>
+                    <h3 class="mb-4 mt-5">Ikuti Kami</h3>
                     <ul class="social-list">
                         <li><a href="#"><i class="fab fa-facebook fa-2x"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter fa-2x"></i></a></li>
@@ -73,36 +73,36 @@
             <!-- Contact Form -->
             <div class="col-lg-8">
                 <div class="feature">
-                    <h3 class="mb-4">Send Us a Message</h3>
+                    <h3 class="mb-4">Kirim Pesan</h3>
                     <form action="#" method="POST" class="row g-3">
                         @csrf
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name" class="form-label">Full Name</label>
+                                <label for="name" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email" class="form-label">Email Address</label>
+                                <label for="email" class="form-label">Alamat Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="subject" class="form-label">Subject</label>
+                                <label for="subject" class="form-label">Subjek</label>
                                 <input type="text" class="form-control" id="subject" name="subject" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="message" class="form-label">Message</label>
+                                <label for="message" class="form-label">Pesan</label>
                                 <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn--primary">
-                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                                <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
                             </button>
                         </div>
                     </form>

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Blog')
-@section('header', 'Blog')
+@section('title', 'Daftar Blog')
+@section('header', 'Daftar Blog')
 
 @section('content')
     <div class="row">
@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Create New Blog
+                            <i class="fas fa-plus"></i> Buat Blog Baru
                         </a>
                     </h3>
                 </div>
@@ -19,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
+                                <th>Judul</th>
                                 <th>Slug</th>
-                                <th>Image</th>
-                                <th>Created At</th>
-                                <th>Action</th>
+                                <th>Gambar</th>
+                                <th>Tanggal Dibuat</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +47,7 @@
                                         <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>

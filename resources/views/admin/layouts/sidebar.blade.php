@@ -25,11 +25,16 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Dasbor
               </p>
             </a>
           </li>
-          <li class="nav-item">                    <a href="{{ route('admin.blogs.index') }}" class="nav-link">                        <i class="nav-icon fas fa-newspaper"></i>                        <p>Blog</p>                    </a>                </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.blogs.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-newspaper"></i>
+              <p>Blog</p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

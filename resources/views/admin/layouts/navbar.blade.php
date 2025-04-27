@@ -15,13 +15,13 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-cog mr-2"></i> Profile
+                    <i class="fas fa-user-cog mr-2"></i> Profil
                 </a>
                 <div class="dropdown-divider"></div>
                 <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
                     @csrf
                     <button type="submit" class="btn btn-danger btn-block">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        <i class="fas fa-sign-out-alt mr-2"></i> Keluar
                     </button>
                 </form>
             </div>

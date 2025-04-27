@@ -79,14 +79,13 @@ class BlogController extends BaseController
     public function store(BlogRequest $request)
     {
         try {
-
            
-                       // Log the incoming request data
+            // Log the incoming request data
             Log::info('Blog creation attempt', [
                 'user_id' => auth()->id(),
                 'request_data' => $request->except(['_token'])
             ]);
-            dd($request);
+            
             // Get validated data
             $validatedData = $request->validated();
 

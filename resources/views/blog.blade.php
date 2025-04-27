@@ -9,8 +9,8 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 class="display-4 text-white mb-4">Legal Insights & Updates</h1>
-                <p class="lead text-white">Stay informed with the latest legal news, insights, and industry updates from our expert team.</p>
+                <h1 class="display-4 text-white mb-4">Wawasan & Pembaruan Hukum</h1>
+                <p class="lead text-white">Tetap terinformasi dengan berita hukum terbaru, wawasan, dan pembaruan industri dari tim ahli kami.</p>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
                         <p>{{ mb_substr($blog->content, 0, 150) }}{{ strlen($blog->content) > 150 ? '...' : '' }}</p>
                     </div>
                     <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">
-                        Read More <i class="fas fa-arrow-right ms-2"></i>
+                        Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </article>
             </div>

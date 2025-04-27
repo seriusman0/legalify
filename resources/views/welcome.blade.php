@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome')
+@section('title', 'Selamat Datang')
 
 @section('content')
 <!-- Hero Section -->
@@ -9,14 +9,14 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold text-white mb-4">Legal Solutions for Your Success</h1>
-                <p class="lead text-white mb-5">Professional legal services tailored to your needs. Our experienced team is here to help you navigate complex legal matters with confidence.</p>
+                <h1 class="display-4 fw-bold text-white mb-4">Solusi Hukum untuk Kesuksesan Anda</h1>
+                <p class="lead text-white mb-5">Layanan hukum profesional yang disesuaikan dengan kebutuhan Anda. Tim berpengalaman kami siap membantu Anda menangani masalah hukum yang kompleks dengan percaya diri.</p>
                 <div class="d-flex gap-3">
                     <a href="{{ route('services') }}" class="btn--primary">
-                        <i class="fas fa-briefcase me-2"></i>Explore Our Services
+                        <i class="fas fa-briefcase me-2"></i>Jelajahi Layanan Kami
                     </a>
                     <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-                        <i class="fas fa-phone me-2"></i>Contact Us
+                        <i class="fas fa-phone me-2"></i>Hubungi Kami
                     </a>
                 </div>
             </div>
@@ -29,8 +29,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center mb-5">
-                <h2 class="h1 mb-4">Our Services</h2>
-                <p class="lead">Comprehensive legal solutions for individuals and businesses</p>
+                <h2 class="h1 mb-4">Layanan Kami</h2>
+                <p class="lead">Solusi hukum komprehensif untuk individu dan bisnis</p>
             </div>
         </div>
         
@@ -40,9 +40,9 @@
                     <div class="mb-4">
                         <i class="fas fa-balance-scale fa-3x text-primary"></i>
                     </div>
-                    <h3>Corporate Law</h3>
-                    <p>Expert guidance for businesses in formation, contracts, and compliance matters.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Learn More</a>
+                    <h3>Hukum Perusahaan</h3>
+                    <p>Panduan ahli untuk bisnis dalam pembentukan, kontrak, dan masalah kepatuhan.</p>
+                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
                 </div>
             </div>
 
@@ -51,9 +51,9 @@
                     <div class="mb-4">
                         <i class="fas fa-gavel fa-3x text-primary"></i>
                     </div>
-                    <h3>Litigation</h3>
-                    <p>Strong representation in court proceedings and dispute resolution.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Learn More</a>
+                    <h3>Litigasi</h3>
+                    <p>Representasi kuat dalam proses pengadilan dan penyelesaian sengketa.</p>
+                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
                 </div>
             </div>
 
@@ -62,9 +62,9 @@
                     <div class="mb-4">
                         <i class="fas fa-shield-alt fa-3x text-primary"></i>
                     </div>
-                    <h3>Intellectual Property</h3>
-                    <p>Protection for your innovations through patents, trademarks, and copyrights.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Learn More</a>
+                    <h3>Kekayaan Intelektual</h3>
+                    <p>Perlindungan untuk inovasi Anda melalui paten, merek dagang, dan hak cipta.</p>
+                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -76,8 +76,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center mb-5">
-                <h2 class="h1 mb-4">Latest Insights</h2>
-                <p class="lead">Stay informed with our legal expertise and industry updates</p>
+                <h2 class="h1 mb-4">Wawasan Terbaru</h2>
+                <p class="lead">Tetap terinformasi dengan keahlian hukum dan pembaruan industri kami</p>
             </div>
         </div>
         
@@ -94,7 +94,7 @@
                     <div class="article__body">
                         <p>{{ mb_substr($blog->content, 0, 150) }}{{ strlen($blog->content) > 150 ? '...' : '' }}</p>
                     </div>
-                    <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">Read More</a>
+                    <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">Baca Selengkapnya</a>
                 </div>
             </div>
             @endforeach
@@ -108,10 +108,10 @@
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2 class="display-4 text-white mb-4">Ready to Get Started?</h2>
-                <p class="lead text-white mb-4">Contact us today for a consultation with our legal experts.</p>
+                <h2 class="display-4 text-white mb-4">Siap Untuk Memulai?</h2>
+                <p class="lead text-white mb-4">Hubungi kami hari ini untuk konsultasi dengan ahli hukum kami.</p>
                 <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-                    <i class="fas fa-paper-plane me-2"></i>Get in Touch
+                    <i class="fas fa-paper-plane me-2"></i>Hubungi Kami
                 </a>
             </div>
         </div>

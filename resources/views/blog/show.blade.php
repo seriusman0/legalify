@@ -13,11 +13,11 @@
                 <div class="text-white mb-4">
                     <span class="me-3">
                         <i class="fas fa-calendar-alt me-2"></i>
-                        {{ $blog->created_at->format('M d, Y') }}
+                        {{ $blog->created_at->format('d M Y') }}
                     </span>
                     <span>
                         <i class="fas fa-user me-2"></i>
-                        {{ $blog->user->name }}
+                        Penulis: {{ $blog->user->name }}
                     </span>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                             <div>
                                 <a href="{{ route('user.blog') }}" class="btn--primary">
                                     <i class="fas fa-arrow-left me-2"></i>
-                                    Back to Blog
+                                    Kembali ke Blog
                                 </a>
                             </div>
                             <div class="social-list">

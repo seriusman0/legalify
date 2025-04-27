@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Create Blog')
-@section('header', 'Create Blog')
+@section('title', 'Buat Blog')
+@section('header', 'Buat Blog')
 
 @section('content')
     <div class="row">
@@ -21,7 +21,7 @@
                     <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" id="blogForm">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title <span class="text-danger">*</span></label>
+                            <label for="title">Judul <span class="text-danger">*</span></label>
                             <input type="text" 
                                 class="form-control @error('title') is-invalid @enderror" 
                                 id="title" 
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="editor">Content <span class="text-danger">*</span></label>
+                            <label for="editor">Konten <span class="text-danger">*</span></label>
                             <div id="editor">{!! old('content') !!}</div>
                             <textarea name="content" id="content" style="display: none">{{ old('content') }}</textarea>
                             @error('content')
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="category">Category <span class="text-danger">*</span></label>
+                            <label for="category">Kategori <span class="text-danger">*</span></label>
                             <input type="text" 
                                 class="form-control @error('category') is-invalid @enderror" 
                                 id="category" 
@@ -58,17 +58,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Image</label>
+                            <label for="image">Gambar</label>
                             <div class="custom-file">
                                 <input type="file" 
                                     class="custom-file-input @error('image') is-invalid @enderror" 
                                     id="image" 
                                     name="image" 
                                     accept="image/jpeg,image/png,image/jpg,image/gif">
-                                <label class="custom-file-label" for="image">Choose file</label>
+                                <label class="custom-file-label" for="image">Pilih file</label>
                             </div>
                             <small class="form-text text-muted">
-                                Allowed formats: jpeg, png, jpg, gif. Max size: 2MB
+                                Format yang diizinkan: jpeg, png, jpg, gif. Ukuran maksimal: 2MB
                             </small>
                             @error('image')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -78,7 +78,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="submitBtn">
                                 <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                Create Blog
+                                Buat Blog
                             </button>
                         </div>
                     </form>
@@ -146,13 +146,13 @@
             if (file) {
                 if (file.size > maxSize) {
                     this.value = '';
-                    showError('Image size must not exceed 2MB');
+                    showError('Ukuran gambar tidak boleh melebihi 2MB');
                     return;
                 }
 
                 if (!allowedTypes.includes(file.type)) {
                     this.value = '';
-                    showError('Invalid image format. Allowed formats: jpeg, png, jpg, gif');
+                    showError('Format gambar tidak valid. Format yang diizinkan: jpeg, png, jpg, gif');
                     return;
                 }
             }
