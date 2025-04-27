@@ -20,7 +20,8 @@
                         </div>
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="5" required>{{ old('content', $blog->content) }}</textarea>
+                            <div id="editor" style="height: 300px;">{!! old('content', $blog->content) !!}</div>
+                            <input type="hidden" name="content" id="content">
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -41,4 +42,23 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        // Set the content of the editor
+        quill.root.innerHTML = {!! json_encode(old('content', $blog->content)) !!};
+
+        // Handle form submission
+        document.querySelector('form').onsubmit = function() {
+            // Get the HTML content from the Quill editor
+            var content = quill.root.innerHTML;
+            // Set the content to the hidden input
+            document.querySelector('#content').value = content;
+        };
+    </script>
+    @endpush
 @endsection
