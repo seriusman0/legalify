@@ -8,57 +8,177 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" id="blogForm">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                            <label for="title">Title <span class="text-danger">*</span></label>
+                            <input type="text" 
+                                class="form-control @error('title') is-invalid @enderror" 
+                                id="title" 
+                                name="title" 
+                                value="{{ old('title') }}" 
+                                required 
+                                maxlength="255">
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group">
-                            <label for="content">Content</label>
-                            <div id="editor" style="height: 300px;"></div>
-                            <input type="hidden" name="content" id="content">
+                            <label for="editor">Content <span class="text-danger">*</span></label>
+                            <div id="editor">{!! old('content') !!}</div>
+                            <textarea name="content" id="content" style="display: none">{{ old('content') }}</textarea>
                             @error('content')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group">
-                            <label for="category">Category</label>
-                            <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{ old('category') }}" required>
+                            <label for="category">Category <span class="text-danger">*</span></label>
+                            <input type="text" 
+                                class="form-control @error('category') is-invalid @enderror" 
+                                id="category" 
+                                name="category" 
+                                value="{{ old('category') }}" 
+                                required 
+                                maxlength="50">
                             @error('category')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image">
+                            <div class="custom-file">
+                                <input type="file" 
+                                    class="custom-file-input @error('image') is-invalid @enderror" 
+                                    id="image" 
+                                    name="image" 
+                                    accept="image/jpeg,image/png,image/jpg,image/gif">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                            </div>
+                            <small class="form-text text-muted">
+                                Allowed formats: jpeg, png, jpg, gif. Max size: 2MB
+                            </small>
                             @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Create Blog
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection
 
-    @push('scripts')
-    <script>
+@push('styles')
+<style>
+    .ql-editor {
+        min-height: 200px;
+    }
+</style>
+@endpush
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Initialize Quill
         var quill = new Quill('#editor', {
-            theme: 'snow'
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'align': [] }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
+            }
         });
 
-        // Handle form submission
-        document.querySelector('form').onsubmit = function() {
-            // Get the HTML content from the Quill editor
+        // Set initial content if exists
+        var content = $('#content').val();
+        if (content) {
+            quill.root.innerHTML = content;
+        }
+
+        // Custom file input
+        bsCustomFileInput.init();
+
+        // Form submission
+        $('#blogForm').on('submit', function(e) {
+            e.preventDefault();
+
+            // Get the HTML content from Quill editor
             var content = quill.root.innerHTML;
-            // Set the content to the hidden input
-            document.querySelector('#content').value = content;
-        };
-    </script>
-    @endpush
-@endsection
+            
+            // Set the content to the hidden textarea
+            $('#content').val(content);
+
+            // Submit form
+            this.submit();
+        });
+
+        // Image file validation
+        $('#image').on('change', function() {
+            const file = this.files[0];
+            const maxSize = 2 * 1024 * 1024; // 2MB
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+
+            if (file) {
+                if (file.size > maxSize) {
+                    this.value = '';
+                    showError('Image size must not exceed 2MB');
+                    return;
+                }
+
+                if (!allowedTypes.includes(file.type)) {
+                    this.value = '';
+                    showError('Invalid image format. Allowed formats: jpeg, png, jpg, gif');
+                    return;
+                }
+            }
+        });
+
+        function showError(message) {
+            const alertHtml = `
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+            
+            // Remove existing alerts
+            $('.alert').remove();
+            
+            // Show new alert
+            $('.card-body').prepend(alertHtml);
+            
+            // Scroll to top of form
+            $('html, body').animate({
+                scrollTop: $('.card-body').offset().top - 20
+            }, 500);
+        }
+    });
+</script>
+@endpush

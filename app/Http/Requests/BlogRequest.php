@@ -27,6 +27,7 @@ class BlogRequest extends FormRequest
             'title.required' => 'Judul blog wajib diisi',
             'title.max' => 'Judul blog maksimal 255 karakter',
             'content.required' => 'Konten blog wajib diisi',
+            'content.string' => 'Konten blog harus berupa teks',
             'category.required' => 'Kategori blog wajib diisi',
             'category.max' => 'Kategori blog maksimal 50 karakter',
             'image.image' => 'File harus berupa gambar',
@@ -35,12 +36,17 @@ class BlogRequest extends FormRequest
         ];
     }
 
-    protected function prepareForValidation()
+    protected function getValidatorInstance()
     {
-        if ($this->hasFile('image')) {
-            $this->merge([
-                'image' => $this->file('image')->store('blog-images', 'public')
-            ]);
-        }
+        $validator = parent::getValidatorInstance();
+        
+        $validator->after(function ($validator) {
+            // Check if content is empty after stripping HTML tags
+            if ($this->has('content') && empty(trim(strip_tags($this->input('content'))))) {
+                $validator->errors()->add('content', 'Konten blog wajib diisi');
+            }
+        });
+        
+        return $validator;
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\BlogRequest;
 use App\Http\Resources\BlogResource;
 use App\Services\BlogService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -25,64 +26,154 @@ class BlogController extends BaseController
 
     public function index()
     {
-        $blogs = $this->blogService->getUserBlogs(auth()->id());
-        return view('admin.blogs.index', compact('blogs'));
+        try {
+            $blogs = $this->blogService->getUserBlogs(auth()->id());
+            return view('admin.blogs.index', compact('blogs'));
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch user blogs', [
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage()
+            ]);
+            return back()->withErrors(['error' => 'Gagal memuat daftar blog.']);
+        }
     }
 
     public function blog()
     {
-        $blogs = $this->blogService->getAllBlogs();
-        return view('blog', compact('blogs'));
+        try {
+            $blogs = $this->blogService->getAllBlogs();
+            return view('blog', compact('blogs'));
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch all blogs', [
+                'error' => $e->getMessage()
+            ]);
+            return back()->withErrors(['error' => 'Gagal memuat daftar blog.']);
+        }
     }
 
     public function show(Blog $blog)
     {
-        return view('blog.show', compact('blog'));
+        try {
+            return view('blog.show', compact('blog'));
+        } catch (\Exception $e) {
+            Log::error('Failed to show blog', [
+                'blog_id' => $blog->id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->withErrors(['error' => 'Gagal menampilkan blog.']);
+        }
     }
 
     public function create()
     {
-        return view('admin.blogs.create');
+        try {
+            return view('admin.blogs.create');
+        } catch (\Exception $e) {
+            Log::error('Failed to load blog creation form', [
+                'error' => $e->getMessage()
+            ]);
+            return back()->withErrors(['error' => 'Gagal memuat halaman pembuatan blog.']);
+        }
     }
 
     public function store(BlogRequest $request)
     {
         try {
+
+           
+                       // Log the incoming request data
+            Log::info('Blog creation attempt', [
+                'user_id' => auth()->id(),
+                'request_data' => $request->except(['_token'])
+            ]);
+            dd($request);
+            // Get validated data
+            $validatedData = $request->validated();
+
+            
+
+            // Check if content is empty after stripping tags
+            if (empty(trim(strip_tags($validatedData['content'])))) {
+                return back()
+                    ->withInput()
+                    ->withErrors(['content' => 'Konten blog wajib diisi']);
+            }
+
             $blog = $this->blogService->createBlog($request);
+            
+            Log::info('Blog created successfully', [
+                'blog_id' => $blog->id,
+                'user_id' => auth()->id()
+            ]);
             
             return redirect()
                 ->route('admin.blogs.index')
                 ->with('success', 'Blog berhasil dibuat.');
+                
         } catch (\Exception $e) {
-            \Log::error('Blog creation failed: ' . $e->getMessage());
+            Log::error('Blog creation failed in controller', [
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             
             return back()
                 ->withInput()
-                ->withErrors(['error' => 'Terjadi kesalahan saat membuat blog: ' . $e->getMessage()]);
+                ->withErrors(['error' => $e->getMessage()]);
         }
     }
 
     public function edit(Blog $blog)
     {
-        $this->authorize('update', $blog);
-        return view('admin.blogs.edit', compact('blog'));
+        try {
+            $this->authorize('update', $blog);
+            return view('admin.blogs.edit', compact('blog'));
+        } catch (\Exception $e) {
+            Log::error('Failed to load blog edit form', [
+                'blog_id' => $blog->id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->withErrors(['error' => 'Gagal memuat halaman edit blog.']);
+        }
     }
 
     public function update(BlogRequest $request, Blog $blog)
     {
         try {
             $this->authorize('update', $blog);
+            
+            // Get validated data
+            $validatedData = $request->validated();
+
+            // Check if content is empty after stripping tags
+            if (empty(trim(strip_tags($validatedData['content'])))) {
+                return back()
+                    ->withInput()
+                    ->withErrors(['content' => 'Konten blog wajib diisi']);
+            }
+
             $this->blogService->updateBlog($blog, $request);
+            
+            Log::info('Blog updated successfully', [
+                'blog_id' => $blog->id,
+                'user_id' => auth()->id()
+            ]);
             
             return redirect()
                 ->route('admin.blogs.index')
                 ->with('success', 'Blog berhasil diperbarui.');
+                
         } catch (\Exception $e) {
-            \Log::error('Blog update failed: ' . $e->getMessage());
+            Log::error('Blog update failed in controller', [
+                'blog_id' => $blog->id,
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             
             return back()
                 ->withInput()
-                ->withErrors(['error' => 'Terjadi kesalahan saat memperbarui blog: ' . $e->getMessage()]);
+                ->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -92,14 +183,24 @@ class BlogController extends BaseController
             $this->authorize('delete', $blog);
             $this->blogService->deleteBlog($blog);
             
+            Log::info('Blog deleted successfully', [
+                'blog_id' => $blog->id,
+                'user_id' => auth()->id()
+            ]);
+            
             return redirect()
                 ->route('admin.blogs.index')
                 ->with('success', 'Blog berhasil dihapus.');
+                
         } catch (\Exception $e) {
-            \Log::error('Blog deletion failed: ' . $e->getMessage());
+            Log::error('Blog deletion failed in controller', [
+                'blog_id' => $blog->id,
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             
-            return back()
-                ->withErrors(['error' => 'Terjadi kesalahan saat menghapus blog: ' . $e->getMessage()]);
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 }
