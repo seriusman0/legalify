@@ -11,10 +11,18 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fas fa-user"></i> {{ Auth::user()->name }}
+                @if(Auth::user()->profile_picture)
+                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" 
+                         alt="Profile Picture" 
+                         class="img-circle elevation-2"
+                         style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;">
+                @else
+                    <i class="fas fa-user"></i>
+                @endif
+                {{ Auth::user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
                     <i class="fas fa-user-cog mr-2"></i> Profil
                 </a>
                 <div class="dropdown-divider"></div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Temporary route to check admin URL key
@@ -36,4 +37,8 @@ Route::prefix('dashboard-' . config('admin.url_key', 'secure'))->middleware(['au
     Route::prefix('manage')->name('admin.')->group(function () {
         Route::resource('blogs', BlogController::class);
     });
+
+    // Profile routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 });

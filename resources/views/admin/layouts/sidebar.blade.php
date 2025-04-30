@@ -11,7 +11,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <i class="fas fa-user-circle fa-2x text-light"></i>
+        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" 
+                         alt="Profile Picture" 
+                         class="img-circle elevation-2"
+                         style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
