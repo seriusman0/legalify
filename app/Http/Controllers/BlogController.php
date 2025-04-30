@@ -67,10 +67,21 @@ class BlogController extends BaseController
     public function create()
     {
         try {
-            return view('admin.blogs.create');
+            Log::info('Attempting to load blog creation form', [
+                'user_id' => auth()->id(),
+                'user_roles' => auth()->user()->getRoleNames()->toArray()
+            ]);
+
+            $view = view('admin.blogs.create');
+            
+            Log::info('Blog creation form loaded successfully');
+            
+            return $view;
         } catch (\Exception $e) {
             Log::error('Failed to load blog creation form', [
-                'error' => $e->getMessage()
+                'user_id' => auth()->id(),
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
             ]);
             return back()->withErrors(['error' => 'Gagal memuat halaman pembuatan blog.']);
         }

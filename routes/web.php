@@ -1,4 +1,4 @@
-/<?php
+<?php
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -7,6 +7,11 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+
+// Temporary route to check admin URL key
+Route::get('/check-admin-url', function() {
+    return 'Admin URL Key: dashboard-' . config('admin.url_key');
+});
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

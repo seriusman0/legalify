@@ -8,7 +8,7 @@
     <div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal2.jpg') }});"></div>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
+            <div class="col-lg-10 text-center">
                 <h1 class="display-4 text-white mb-4">{{ $blog->title }}</h1>
                 <div class="text-white mb-4">
                     <span class="me-3">
@@ -29,14 +29,14 @@
 <section class="space--sm">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <article class="masonry__item">
                     @if($blog->image)
                         <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-4 rounded" alt="{{ $blog->title }}">
                     @endif
                     
-                    <div class="article__body">
-                        {!! nl2br(e($blog->content)) !!}
+                    <div class="article__body blog-content">
+                        {!! $blog->content !!}
                     </div>
 
                     <!-- Tags or Categories if available -->
@@ -95,6 +95,48 @@
     margin-bottom: 1.5rem;
 }
 
+.blog-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
+
+.blog-content h1, 
+.blog-content h2, 
+.blog-content h3, 
+.blog-content h4, 
+.blog-content h5, 
+.blog-content h6 {
+    margin: 1.5rem 0 1rem;
+    font-weight: 600;
+}
+
+.blog-content ul,
+.blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.blog-content blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid #4a90e2;
+    background-color: #f8f9fa;
+    font-style: italic;
+}
+
+.blog-content pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
 .social-list a {
     color: #4a90e2;
     font-size: 1.2rem;
@@ -106,7 +148,11 @@
 }
 
 .masonry__item {
-    padding: 2rem;
+    padding: 2rem 3rem;
+    
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+    }
 }
 </style>
 @endpush

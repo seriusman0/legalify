@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+use Illuminate\Support\Str;
+@endphp
 
 @section('title', 'Blog')
 
@@ -22,7 +25,7 @@
         <div class="row">
             @foreach($blogs as $blog)
             <div class="col-md-4 mb-4">
-                <article class="masonry__item">
+                <article class="masonry__item d-flex flex-column">
                     @if($blog->image)
                         <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ $blog->title }}">
                     @endif
@@ -35,12 +38,14 @@
                             </small>
                         </div>
                     </div>
-                    <div class="article__body">
-                        <p>{{ mb_substr($blog->content, 0, 150) }}{{ strlen($blog->content) > 150 ? '...' : '' }}</p>
+                    <div class="article__body flex-grow-1">
+                        {{ Str::limit(strip_tags($blog->content), 150) }}
                     </div>
-                    <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">
-                        Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
+                    <div class="article__footer mt-3">
+                        <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-primary">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
                 </article>
             </div>
             @endforeach
@@ -78,10 +83,42 @@
 .masonry__item {
     height: 100%;
     transition: transform 0.3s ease;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.masonry__item .article__body {
+    flex: 1 0 auto;
+    white-space: pre-line;
 }
 
 .masonry__item:hover {
     transform: translateY(-10px);
+}
+
+.article__body {
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    border-color: #357abd;
+    color: white;
 }
 
 .article__title h2 {

@@ -98,8 +98,22 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
+// Add error logging
+window.onerror = function(msg, url, line) {
+    console.error('JavaScript error:', {
+        message: msg,
+        url: url,
+        line: line
+    });
+    return false;
+};
+
+$(document).ready(function() {
+    console.log('Document ready');
+    
+    try {
         // Initialize Quill
+        console.log('Initializing Quill editor');
         var quill = new Quill('#editor', {
             theme: 'snow',
             modules: {
@@ -117,33 +131,50 @@
         // Set initial content if exists
         var content = $('#content').val();
         if (content) {
+            console.log('Setting initial content');
             quill.root.innerHTML = content;
         }
 
         // Custom file input
+        console.log('Initializing bs-custom-file-input');
         bsCustomFileInput.init();
 
         // Form submission
         $('#blogForm').on('submit', function(e) {
+            console.log('Form submitted');
             e.preventDefault();
 
-            // Get the HTML content from Quill editor
-            var content = quill.root.innerHTML;
-            
-            // Set the content to the hidden textarea
-            $('#content').val(content);
+            try {
+                // Get the HTML content from Quill editor
+                var content = quill.root.innerHTML;
+                console.log('Quill content length:', content.length);
+                
+                // Set the content to the hidden textarea
+                $('#content').val(content);
 
-            // Submit form
-            this.submit();
+                // Submit form
+                console.log('Submitting form');
+                this.submit();
+            } catch (error) {
+                console.error('Error during form submission:', error);
+                throw error;
+            }
         });
 
         // Image file validation
         $('#image').on('change', function() {
+            console.log('Image file selected');
             const file = this.files[0];
             const maxSize = 2 * 1024 * 1024; // 2MB
             const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
 
             if (file) {
+                console.log('Validating file:', {
+                    name: file.name,
+                    size: file.size,
+                    type: file.type
+                });
+
                 if (file.size > maxSize) {
                     this.value = '';
                     showError('Ukuran gambar tidak boleh melebihi 2MB');
@@ -159,6 +190,7 @@
         });
 
         function showError(message) {
+            console.error('Validation error:', message);
             const alertHtml = `
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     ${message}
@@ -179,6 +211,10 @@
                 scrollTop: $('.card-body').offset().top - 20
             }, 500);
         }
-    });
+    } catch (error) {
+        console.error('Error during initialization:', error);
+        throw error;
+    }
+});
 </script>
 @endpush

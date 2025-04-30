@@ -71,13 +71,13 @@
         
         <div class="row">
             @foreach($latestBlogs as $blog)
-            <div class="col-md-4">
-                <div class="masonry__item">
+            <div class="col-md-4 mb-4">
+                <article class="masonry__item d-flex flex-column h-100">
                     @if($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ $blog->title }}">
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ e($blog->title) }}">
                     @endif
                     <div class="article__title">
-                        <h3 class="h5">{{ $blog->title }}</h3>
+                        <h3 class="h5">{{ e($blog->title) }}</h3>
                         <div class="text-muted mb-3">
                             <small>
                                 <i class="fas fa-calendar-alt me-2"></i>
@@ -85,11 +85,15 @@
                             </small>
                         </div>
                     </div>
-                    <div class="article__body">
-                        <p>{{ mb_substr($blog->content, 0, 150) }}{{ strlen($blog->content) > 150 ? '...' : '' }}</p>
+                    <div class="article__body flex-grow-1">
+                        <p>{!! nl2br(e(mb_substr(strip_tags($blog->content), 0, 150))) !!}{{ strlen(strip_tags($blog->content)) > 150 ? '...' : '' }}</p>
                     </div>
-                    <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">Read More</a>
-                </div>
+                    <div class="article__footer mt-3">
+                        <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-primary w-100">
+                            Read More <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
             @endforeach
         </div>
@@ -176,10 +180,35 @@
 .masonry__item {
     height: 100%;
     transition: transform 0.3s ease;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .masonry__item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.article__body {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    border-color: #357abd;
+    transform: translateY(-2px);
 }
 
 .text-primary {
@@ -188,6 +217,12 @@
 
 .bg-light {
     background-color: #f8f9fa !important;
+}
+
+.article__title h3 {
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 </style>
 @endpush

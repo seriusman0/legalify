@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@php
+use Illuminate\Support\Str;
+@endphp
+
 @section('title', 'Selamat Datang')
 
 @section('content')
@@ -82,20 +86,31 @@
         </div>
         
         <div class="row">
+            
             @foreach($latestBlogs as $blog)
-            <div class="col-md-4">
-                <div class="masonry__item">
+            <div class="col-md-4 mb-4">
+                <article class="masonry__item d-flex flex-column">
                     @if($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ $blog->title }}">
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ e($blog->title) }}">
                     @endif
                     <div class="article__title">
-                        <h3>{{ $blog->title }}</h3>
+                        <h2 class="h4">{{ e($blog->title) }}</h2>
+                        <div class="text-muted mb-3">
+                            <small>
+                                <i class="fas fa-calendar-alt me-2"></i>
+                                {{ $blog->created_at->format('M d, Y') }}
+                            </small>
+                        </div>
                     </div>
-                    <div class="article__body">
-                        <p>{{ mb_substr($blog->content, 0, 150) }}{{ strlen($blog->content) > 150 ? '...' : '' }}</p>
+                    <div class="article__body flex-grow-1">
+                        {!! nl2br(e(Str::limit(strip_tags($blog->content), 150))) !!}
                     </div>
-                    <a href="{{ route('blog.show', $blog->id) }}" class="btn--primary">Baca Selengkapnya</a>
-                </div>
+                    <div class="article__footer mt-3">
+                        <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-primary">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
             @endforeach
         </div>
@@ -146,10 +161,41 @@
 
 .masonry__item {
     transition: transform 0.3s ease;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .masonry__item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.article__body {
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+    border-color: #357abd;
+    transform: translateY(-2px);
+}
+
+.article__title h2 {
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 </style>
 @endpush
