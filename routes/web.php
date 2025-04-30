@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\MessageController;
 use Illuminate\Support\Facades\Route;
 
 // Temporary route to check admin URL key
@@ -41,4 +42,13 @@ Route::prefix('dashboard-' . config('admin.url_key', 'secure'))->middleware(['au
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
+
+    // Message management routes
+    Route::prefix('messages')->name('admin.messages.')->group(function () {
+        Route::get('/', [MessageController::class, 'index'])->name('index');
+        Route::get('/{message}', [MessageController::class, 'show'])->name('show');
+        Route::patch('/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('mark-as-read');
+        Route::patch('/{message}/mark-as-unread', [MessageController::class, 'markAsUnread'])->name('mark-as-unread');
+        Route::delete('/{message}', [MessageController::class, 'destroy'])->name('destroy');
+    });
 });

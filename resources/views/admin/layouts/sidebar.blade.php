@@ -42,6 +42,20 @@
               <p>Users</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.messages.index') }}" class="nav-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Pesan
+                @php
+                    $unreadCount = \App\Models\Message::where('status', 'unread')->count();
+                @endphp
+                @if($unreadCount > 0)
+                    <span class="badge badge-danger right">{{ $unreadCount }}</span>
+                @endif
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
