@@ -74,7 +74,7 @@
             <div class="col-md-4 mb-4">
                 <article class="masonry__item d-flex flex-column h-100">
                     @if($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ e($blog->title) }}">
+                        <img src="{{ asset('.storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ e($blog->title) }}">
                     @endif
                     <div class="article__title">
                         <h3 class="h5">{{ e($blog->title) }}</h3>

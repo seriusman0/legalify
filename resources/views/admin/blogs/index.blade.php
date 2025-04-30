@@ -34,7 +34,7 @@
                                     <td>{{ $blog->slug }}</td>
                                     <td>
                                         @if ($blog->image)
-                                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail" style="max-width: 100px;">
+                                            <img src="{{ asset('.storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail" style="max-width: 100px;">
                                         @else
                                             -
                                         @endif

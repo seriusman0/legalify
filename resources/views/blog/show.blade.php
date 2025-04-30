@@ -32,7 +32,7 @@
             <div class="col-lg-10">
                 <article class="masonry__item">
                     @if($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-4 rounded" alt="{{ $blog->title }}">
+                        <img src="{{ asset('.storage/' . $blog->image) }}" class="img-fluid mb-4 rounded" alt="{{ $blog->title }}">
                     @endif
                     
                     <div class="article__body blog-content">

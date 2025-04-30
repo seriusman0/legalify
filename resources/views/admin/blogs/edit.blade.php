@@ -30,7 +30,7 @@
                             <label for="image">Gambar</label>
                             <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image" name="image">
                             @if ($blog->image)
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                <img src="{{ asset('.storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                             @endif
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
