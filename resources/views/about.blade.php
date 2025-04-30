@@ -77,30 +77,12 @@
                 <p class="lead">Kenali para ahli di balik kesuksesan kami</p>
             </div>
             
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 mx-auto">
                 <div class="feature text-center">
-                    <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
-                    <h3>John Doe</h3>
-                    <p class="text-primary mb-2">Managing Partner</p>
-                    <p>Spesialis Hukum Perusahaan dengan pengalaman lebih dari 15 tahun.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="feature text-center">
-                    <img src="{{ asset('assets/template/img/accom-3.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
-                    <h3>Jane Smith</h3>
-                    <p class="text-primary mb-2">Senior Partner</p>
-                    <p>Ahli dalam Hukum Kekayaan Intelektual dan Teknologi.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="feature text-center">
-                    <img src="{{ asset('assets/template/img/accom-1.jpg') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
-                    <h3>Mike Johnson</h3>
-                    <p class="text-primary mb-2">Kepala Litigasi</p>
-                    <p>Spesialis dalam Litigasi Komersial Kompleks.</p>
+                    <img src="{{ asset('assets/images/author.png') }}" alt="Team Member" class="img-fluid rounded-circle mb-4" style="width: 200px; height: 200px; object-fit: cover;">
+                    <h3>Andreas</h3>
+                    <p class="text-primary mb-2">Founder</p>
+                    <p>Spesialis Hukum Perusahaan.</p>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -28,12 +29,27 @@ class PageController extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'name.max' => 'Nama lengkap tidak boleh lebih dari :max karakter.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Alamat email tidak boleh lebih dari :max karakter.',
+            'subject.required' => 'Subjek wajib diisi.',
+            'subject.max' => 'Subjek tidak boleh lebih dari :max karakter.',
+            'message.required' => 'Pesan wajib diisi.',
         ]);
 
-        // Here you would typically send an email or store the contact form data
-        // For now, we'll just redirect back with a success message
-        return redirect()
-            ->back()
-            ->with('success', 'Thank you for your message. We will get back to you soon!');
+        try {
+            Message::create($validated);
+            return redirect()
+                ->back()
+                ->with('success', 'Terima kasih! Pesan Anda telah berhasil dikirim. Kami akan segera menghubungi Anda.');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->with('error', 'Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.')
+                ->withInput();
+        }
     }
 }

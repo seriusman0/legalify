@@ -74,34 +74,65 @@
             <div class="col-lg-8">
                 <div class="feature">
                     <h3 class="mb-4">Kirim Pesan</h3>
-                    <form action="#" method="POST" class="row g-3">
+
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('contact.send') }}" method="POST" class="row g-3">
                         @csrf
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                                    id="name" name="name" value="{{ old('name') }}" required>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email" class="form-label">Alamat Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                                    id="email" name="email" value="{{ old('email') }}" required>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="subject" class="form-label">Subjek</label>
-                                <input type="text" class="form-control" id="subject" name="subject" required>
+                                <input type="text" class="form-control @error('subject') is-invalid @enderror" 
+                                    id="subject" name="subject" value="{{ old('subject') }}" required>
+                                @error('subject')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="message" class="form-label">Pesan</label>
-                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                <textarea class="form-control @error('message') is-invalid @enderror" 
+                                    id="message" name="message" rows="5" required>{{ old('message') }}</textarea>
+                                @error('message')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn--primary">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
                             </button>
                         </div>
@@ -144,6 +175,10 @@
 
 .feature {
     height: 100%;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .text-primary {
@@ -164,6 +199,8 @@
 .social-list {
     display: flex;
     gap: 1.5rem;
+    padding: 0;
+    list-style: none;
 }
 
 .social-list a {
@@ -173,6 +210,23 @@
 
 .social-list a:hover {
     color: #2d5a8e;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #2d5a8e;
+    border-color: #2d5a8e;
+}
+
+.alert {
+    border-radius: 4px;
+    margin-bottom: 2rem;
 }
 </style>
 @endpush

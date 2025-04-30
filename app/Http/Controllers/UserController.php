@@ -10,7 +10,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json($users);
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
     }
 
     public function store(Request $request)
@@ -19,9 +24,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'phone_number' => 'nullable|string|max:20',
+            'company_name' => 'nullable|string|max:255',
+            'business_type' => 'nullable|string|max:255',
+            'address' => 'nullable|string',
+            'account_status' => 'required|in:active,inactive',
         ]);
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -29,22 +39,29 @@ class UserController extends Controller
             'company_name' => $request->company_name,
             'business_type' => $request->business_type,
             'address' => $request->address,
-            'subscription_plan' => $request->subscription_plan,
-            'account_status' => $request->account_status ?? 'active',
+            'account_status' => $request->account_status,
         ]);
 
-        return response()->json($user, 201);
+        return redirect()->route('users.index')
+            ->with('success', 'User created successfully.');
     }
 
-    public function show($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-        return response()->json($user);
+        return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'phone_number' => 'nullable|string|max:20',
+            'company_name' => 'nullable|string|max:255',
+            'business_type' => 'nullable|string|max:255',
+            'address' => 'nullable|string',
+            'account_status' => 'required|in:active,inactive',
+        ]);
 
         $user->update($request->only([
             'name',
@@ -53,18 +70,18 @@ class UserController extends Controller
             'company_name',
             'business_type',
             'address',
-            'subscription_plan',
             'account_status',
         ]));
 
-        return response()->json($user);
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
 
-        return response()->json(null, 204);
+        return redirect()->route('users.index')
+            ->with('success', 'User deleted successfully.');
     }
 }
