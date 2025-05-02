@@ -13,8 +13,8 @@ use Illuminate\Support\Str;
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold text-white mb-4">Solusi Hukum untuk Kesuksesan Anda</h1>
-                <p class="lead text-white mb-5">Layanan hukum profesional yang disesuaikan dengan kebutuhan Anda. Tim berpengalaman kami siap membantu Anda menangani masalah hukum yang kompleks dengan percaya diri.</p>
+                <h1 class="display-4 fw-bold text-white mb-4">Urus Legalitas Usaha Tanpa Ribet – Mulai dari PT, CV, hingga Merek Dagang</h1>
+                <p class="lead text-white mb-5">Kami bantu Anda mendirikan badan usaha, mengurus perizinan, hingga dokumen hukum dengan proses yang cepat, transparan, dan terpercaya. Cocok untuk UMKM, startup, hingga perseorangan yang ingin legalitas usaha beres tanpa drama.</p>
                 <div class="d-flex gap-3">
                     <a href="{{ route('services') }}" class="btn--primary">
                         <i class="fas fa-briefcase me-2"></i>Jelajahi Layanan Kami

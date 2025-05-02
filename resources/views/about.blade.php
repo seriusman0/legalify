@@ -25,9 +25,11 @@
             </div>
             <div class="col-lg-6">
                 <div class="feature">
-                    <h2 class="mb-4">Cerita Kami</h2>
-                    <p class="lead mb-4">Didirikan dengan visi untuk membuat layanan hukum lebih mudah diakses dan transparan, Legalify telah berkembang menjadi nama yang dipercaya di industri hukum.</p>
-                    <p>Kami menggabungkan pengalaman bertahun-tahun dalam bidang hukum dengan teknologi modern untuk memberikan solusi hukum yang efisien dan efektif bagi klien kami. Komitmen kami terhadap keunggulan dan kepuasan klien telah menjadikan kami pilihan utama bagi bisnis dan individu.</p>
+                    <h2 class="mb-4">Tentang Legalify ID</h2>
+                    <p class="lead mb-4">Legalify adalah mitra hukum terpercaya bagi individu dan bisnis yang ingin tumbuh dengan aman dan legal.
+Kami membantu Anda dalam pendirian badan usaha, penyusunan dokumen hukum, perlindungan merek, serta layanan retainer hukum.
+Didukung tim profesional berpengalaman, kami hadir untuk memastikan setiap langkah bisnis Anda sesuai hukum — tanpa ribet, tanpa mahal, tanpa drama.
+</p>
                 </div>
             </div>
         </div>

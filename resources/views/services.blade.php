@@ -19,82 +19,137 @@
 <!-- Services -->
 <section class="space--sm">
     <div class="container">
+        @if(session('error'))
+        <div class="alert alert-danger mb-4">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="row">
-            <!-- Corporate Law -->
-            <div class="col-md-6 mb-4">
-                <div class="feature">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="me-4">
-                            <i class="fas fa-balance-scale fa-2x text-primary"></i>
+            <!-- Service Packages -->
+            @php
+                $currentTitle = '';
+                $isProcessSection = false;
+            @endphp
+            
+            @foreach($services as $service)
+                @if(strpos($service['title'], 'Alur Proses') !== false)
+                    @php $isProcessSection = true; @endphp
+                    <!-- Process Section -->
+                    <div class="col-12 mt-5 mb-5">
+                        <h2 class="text-center mb-5">Alur Proses Pendirian Badan Usaha</h2>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <div class="process-timeline">
+                                    @continue
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="mb-0">Hukum Perusahaan</h3>
                     </div>
-                    <p>Layanan hukum perusahaan kami meliputi:</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Pembentukan & Struktur Bisnis</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Pembuatan & Review Kontrak</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Tata Kelola Perusahaan</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Merger & Akuisisi</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Litigation -->
-            <div class="col-md-6 mb-4">
-                <div class="feature">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="me-4">
-                            <i class="fas fa-gavel fa-2x text-primary"></i>
+                @elseif($isProcessSection && $service['title'])
+                    <!-- Process Step -->
+                    <div class="col-md-4 mb-4">
+                        <div class="process-step text-center">
+                            <div class="process-number mb-3">
+                                {{ substr($service['title'], 0, 1) }}
+                            </div>
+                            <h5>{{ substr($service['title'], 3) }}</h5>
+                            @php
+                                $icon = match(substr($service['title'], 0, 1)) {
+                                    '1' => 'fa-comments',
+                                    '2' => 'fa-search',
+                                    '3' => 'fa-file-signature',
+                                    '4' => 'fa-pen-fancy',
+                                    '5' => 'fa-stamp',
+                                    '6' => 'fa-id-card',
+                                    default => 'fa-circle'
+                                };
+                            @endphp
+                            <i class="fas {{ $icon }} fa-2x text-primary mt-3"></i>
                         </div>
-                        <h3 class="mb-0">Litigasi</h3>
                     </div>
-                    <p>Layanan litigasi kami meliputi:</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Litigasi Perdata</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Sengketa Komersial</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Alternatif Penyelesaian Sengketa</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Banding</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Intellectual Property -->
-            <div class="col-md-6 mb-4">
-                <div class="feature">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="me-4">
-                            <i class="fas fa-shield-alt fa-2x text-primary"></i>
+                @else
+                    @if($service['title'])
+                        @if($currentTitle)
+                            </div> <!-- Close previous row -->
+                            <div class="col-12"><hr class="my-5"></div>
+                        @endif
+                        
+                        @php
+                            $currentTitle = $service['title'];
+                        @endphp
+                        
+                        <!-- Service Category Header -->
+                        <div class="col-12 mb-4">
+                            <h2 class="text-primary border-bottom pb-2">
+                                @php
+                                    $categoryIcon = match($currentTitle) {
+                                        'PT' => 'fa-building',
+                                        'PT Perorangan' => 'fa-user-tie',
+                                        'PT PMA' => 'fa-globe',
+                                        'CV / Firma' => 'fa-handshake',
+                                        'Yayasan / Perkumpulan / Koperasi' => 'fa-users',
+                                        default => 'fa-briefcase'
+                                    };
+                                @endphp
+                                <i class="fas {{ $categoryIcon }} me-2"></i>
+                                {{ $currentTitle }}
+                            </h2>
                         </div>
-                        <h3 class="mb-0">Kekayaan Intelektual</h3>
-                    </div>
-                    <p>Layanan KI kami meliputi:</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Pendaftaran Paten</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Pendaftaran Merek Dagang</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Perlindungan Hak Cipta</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Litigasi KI</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Employment Law -->
-            <div class="col-md-6 mb-4">
-                <div class="feature">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="me-4">
-                            <i class="fas fa-users fa-2x text-primary"></i>
+                        <div class="row"> <!-- Start new row for this category -->
+                    @endif
+                    
+                    @if($service['description'])
+                        <!-- Service Package -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h4 class="card-title text-primary mb-3">
+                                        {{ $service['description'] }}
+                                    </h4>
+                                    
+                                    @if(!empty($service['features']))
+                                        @php
+                                            $mainFeatures = array_slice($service['features'], 0, -3);
+                                            $description = $service['features'][1] ?? '';
+                                            $additionalInfo = $service['features'][2] ?? '';
+                                            $priceRange = $service['features'][3] ?? '';
+                                            $finalPrice = $service['features'][4] ?? '';
+                                        @endphp
+                                        
+                                        <!-- Main Features -->
+                                        <p class="text-muted mb-3">{{ $description }}</p>
+                                        <div class="features mb-4">
+                                            @foreach($mainFeatures as $index => $feature)
+                                                @if($index === 0)
+                                                    <h6 class="fw-bold mb-2">Includes:</h6>
+                                                    <p class="mb-2"><i class="fas fa-check text-success me-2"></i>{{ $feature }}</p>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        
+                                        <!-- Additional Info -->
+                                        @if($additionalInfo && $additionalInfo !== '-')
+                                            <p class="text-muted small mb-3">{{ $additionalInfo }}</p>
+                                        @endif
+                                        
+                                        <!-- Pricing -->
+                                        @if($priceRange)
+                                            <div class="pricing mt-auto">
+                                                <p class="text-muted mb-1"><s>{{ $priceRange }}</s></p>
+                                                <h5 class="text-primary mb-0">{{ $finalPrice }}</h5>
+                                            </div>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="mb-0">Hukum Ketenagakerjaan</h3>
-                    </div>
-                    <p>Layanan hukum ketenagakerjaan kami meliputi:</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Kontrak Kerja</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Kebijakan Tempat Kerja</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Klaim Diskriminasi</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Perselisihan Ketenagakerjaan</li>
-                    </ul>
-                </div>
-            </div>
+                    @endif
+                @endif
+            @endforeach
+            
+            @if(!$isProcessSection)
+                </div> <!-- Close last row if not in process section -->
+            @endif
         </div>
     </div>
 </section>
@@ -133,28 +188,137 @@
     z-index: 2;
 }
 
-.feature {
+/* Base styles */
+.text-primary { color: #4a90e2 !important; }
+.text-success { color: #28a745 !important; }
+
+/* Card styles */
+.card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    transition: transform 0.3s ease;
+    padding: 1.5rem;
 }
 
-.feature:hover {
-    transform: translateY(-10px);
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4a90e2;
 }
 
-.text-primary {
-    color: #4a90e2 !important;
+/* Features and pricing styles */
+.features {
+    flex-grow: 1;
 }
 
-.feature ul li {
+.pricing {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+s {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Section headers */
+h2.text-primary {
+    font-size: 1.75rem;
+    margin-top: 1rem;
     position: relative;
-    padding-left: 1.5rem;
 }
 
-.feature ul li i {
+/* Process section styles */
+.process-step {
+    position: relative;
+    padding: 2rem;
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.process-number {
+    width: 40px;
+    height: 40px;
+    background: #4a90e2;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.process-step h5 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    font-weight: 600;
+}
+
+.process-timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.process-timeline::before {
+    content: '';
     position: absolute;
+    top: 50%;
     left: 0;
-    top: 0.25rem;
+    right: 0;
+    height: 2px;
+    background: rgba(74, 144, 226, 0.2);
+    z-index: 1;
+}
+
+.process-step i {
+    color: #4a90e2;
+    opacity: 0.9;
+}
+
+/* Service category icons */
+h2.text-primary i {
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .process-step {
+        padding: 1rem;
+    }
+    
+    .process-timeline::before {
+        left: 20px;
+    }
 }
 </style>
 @endpush
