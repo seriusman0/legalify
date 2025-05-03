@@ -1,11 +1,137 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@layer base {
+    body {
+        @apply font-sans bg-gray-50;
+    }
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+@layer components {
+    .container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    }
+
+    .btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700 hover:-translate-y-0.5;
+    }
+
+    .btn-outline {
+        @apply border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:-translate-y-0.5;
+    }
+
+    .nav-link {
+        @apply px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors;
+    }
+
+    .nav-cta {
+        @apply bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-200;
+    }
+
+    /* Mobile Menu */
+    #mobileNav {
+        @apply fixed left-0 right-0 top-16 bg-white border-t border-gray-100 shadow-lg transform transition-all duration-300 ease-in-out;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+    }
+
+    #mobileNav.hidden {
+        @apply opacity-0 -translate-y-2;
+        pointer-events: none;
+    }
+
+    #mobileNav:not(.hidden) {
+        @apply opacity-100 translate-y-0;
+    }
+
+    #mobileNav .nav-link {
+        @apply block w-full px-6 py-3 hover:bg-gray-50;
+    }
+
+    #mobileNav .nav-cta {
+        @apply mx-6 my-3 block text-center;
+    }
+
+    /* Feature Cards */
+    .feature-card {
+        @apply bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-2;
+    }
+
+    .service-card {
+        @apply bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-2;
+    }
+
+    .testimonial-card {
+        @apply bg-white p-8 rounded-2xl shadow-sm;
+    }
+
+    .footer-title {
+        @apply text-lg font-semibold text-gray-900 mb-4;
+    }
+
+    .footer-links {
+        @apply space-y-3 list-none p-0;
+    }
+
+    .footer-links a {
+        @apply text-gray-600 hover:text-blue-600 transition-colors;
+    }
+
+    .social-link {
+        @apply w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-blue-600 hover:text-white transition-all duration-200 hover:-translate-y-1;
+    }
+}
+
+/* Hero Sections */
+.hero {
+    @apply relative py-24 overflow-hidden;
+}
+
+.hero::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-90;
+}
+
+.hero-content {
+    @apply relative z-10;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Navbar */
+.navbar-scrolled {
+    @apply shadow-md;
+}
+
+/* Mobile Menu Button */
+#mobileMenuButton {
+    @apply relative z-50;
+}
+
+#mobileMenuButton:focus {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Responsive Design */
+@screen lg {
+    #mobileNav {
+        @apply hidden;
+    }
 }

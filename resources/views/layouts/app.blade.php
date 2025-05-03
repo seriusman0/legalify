@@ -5,97 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Legalify</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Template CSS -->
-    <link href="{{ asset('assets/template/css/theme.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Vite Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @stack('css')
 </head>
-<body>
+<body class="antialiased">
     <!-- Navigation -->
-    <div class="nav-container">
-        <div class="container">
-            <nav class="d-flex justify-content-between align-items-center py-3">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="logo">
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container relative">
+            <div class="flex items-center justify-between h-16">
+                <a href="{{ url('/') }}" class="flex-shrink-0">
+                    <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="h-10">
                 </a>
-                <div class="d-none d-lg-block">
-                    <ul class="menu-horizontal">
-                        <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('services') }}">Services</a></li>
-                        <li><a href="{{ route('user.blog') }}">Blog</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
-                    </ul>
+                <div class="hidden lg:flex lg:items-center lg:space-x-8">
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'text-blue-600' : '' }}">Home</a>
+                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'text-blue-600' : '' }}">About</a>
+                    <a href="{{ route('services') }}" class="nav-link {{ request()->routeIs('services') ? 'text-blue-600' : '' }}">Services</a>
+                    <a href="{{ route('user.blog') }}" class="nav-link {{ request()->routeIs('user.blog') ? 'text-blue-600' : '' }}">Blog</a>
+                    <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-blue-600' : '' }}">Contact</a>
+                    <a href="{{ route('contact') }}" class="nav-cta">Konsultasi Gratis</a>
                 </div>
-                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav">
-                    <span class="navbar-toggler-icon"></span>
+                <button id="mobileMenuButton" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none" type="button" aria-label="Toggle menu">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
                 </button>
-            </nav>
-        </div>
-        <!-- Mobile Navigation -->
-        <div class="collapse" id="mobileNav">
-            <div class="container py-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('user.blog') }}">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-                </ul>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileNav" class="hidden lg:hidden">
+                <div class="py-2 divide-y divide-gray-100">
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50' : '' }}">
+                        <i class="fas fa-home w-5 mr-3"></i>
+                        Home
+                    </a>
+                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'text-blue-600 bg-blue-50' : '' }}">
+                        <i class="fas fa-info-circle w-5 mr-3"></i>
+                        About
+                    </a>
+                    <a href="{{ route('services') }}" class="nav-link {{ request()->routeIs('services') ? 'text-blue-600 bg-blue-50' : '' }}">
+                        <i class="fas fa-briefcase w-5 mr-3"></i>
+                        Services
+                    </a>
+                    <a href="{{ route('user.blog') }}" class="nav-link {{ request()->routeIs('user.blog') ? 'text-blue-600 bg-blue-50' : '' }}">
+                        <i class="fas fa-newspaper w-5 mr-3"></i>
+                        Blog
+                    </a>
+                    <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'text-blue-600 bg-blue-50' : '' }}">
+                        <i class="fas fa-envelope w-5 mr-3"></i>
+                        Contact
+                    </a>
+                    <div class="p-4">
+                        <a href="{{ route('contact') }}" class="nav-cta w-full justify-center">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            Konsultasi Gratis
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
     <main>
         @yield('content')
     </main>
 
-    <footer class="space--sm">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="mb-4">About Legalify</h5>
-                    <p>Professional legal services tailored to your needs. Our experienced team is here to help you navigate complex legal matters with confidence.</p>
+    <footer class="bg-white border-t">
+        <div class="container py-16">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-6">
+                    <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="h-10">
+                    <p class="text-gray-600">Kami bantu Anda mendirikan badan usaha, mengurus perizinan, hingga dokumen hukum dengan proses yang cepat, transparan, dan terpercaya. Cocok untuk UMKM, startup, hingga perseorangan yang ingin legalitas usaha beres tanpa drama.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="mb-4">Contact Info</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> andreassina9a@gmail.com</li>
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 851-7301-0820</li>
+                
+                <div>
+                    <h5 class="footer-title">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="{{ route('about') }}">About Us</a></li>
+                        <li><a href="{{ route('services') }}">Services</a></li>
+                        <li><a href="{{ route('user.blog') }}">Blog</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h5 class="mb-4">Follow Us</h5>
-                    <ul class="social-list">
-                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                
+                <div>
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Pendirian PT</a></li>
+                        <li><a href="#">Pendirian CV</a></li>
+                        <li><a href="#">Perizinan Usaha</a></li>
+                        <li><a href="#">Merek Dagang</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="footer-links">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                            andreassina9a@gmail.com
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-gray-400"></i>
+                            +62 851-7301-0820
+                        </li>
                     </ul>
                 </div>
             </div>
-            <hr class="mt-4 mb-3">
-            <div class="text-center">
-                <p class="mb-0">&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
-                <div class="mt-2 small text-muted">
-                    <p class="mb-1">Image Credits:</p>
-                    <p class="mb-1"><a href="https://www.freepik.com/free-photo/closeup-shot-person-writing-book-with-gavel-table_25928542.htm">Legal writing image by wirestock on Freepik</a></p>
-                    <p class="mb-1"><a href="https://www.freepik.com/free-photo/visa-application-form-composition_18895521.htm">Legal documents image by freepik</a></p>
-                </div>
+            
+            <hr class="my-8 border-gray-200">
+            
+            <div class="text-center text-gray-600">
+                <p>&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets/template/js/scripts.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

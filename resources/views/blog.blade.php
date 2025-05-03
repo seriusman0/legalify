@@ -7,144 +7,166 @@ use Illuminate\Support\Str;
 
 @section('content')
 <!-- Header -->
-<section class="cover">
-<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal1.jpg') }});"></div>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 text-white mb-4">Wawasan & Pembaruan Hukum</h1>
-                <p class="lead text-white">Tetap terinformasi dengan berita hukum terbaru, wawasan, dan pembaruan industri dari tim ahli kami.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Blog Posts -->
-<section class="space--sm">
+<section class="bg-gradient-to-r from-blue-600 to-blue-800 py-16">
     <div class="container">
-        <div class="row">
-            @foreach($blogs as $blog)
-            <div class="col-md-4 mb-4">
-                <article class="masonry__item d-flex flex-column">
-                    @if($blog->image)
-                        <img src="{{ asset('.storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ $blog->title }}">
-                    @endif
-                    <div class="article__title">
-                        <h2 class="h4">{{ $blog->title }}</h2>
-                        <div class="text-muted mb-3">
-                            <small>
-                                <i class="fas fa-calendar-alt me-2"></i>
-                                {{ $blog->created_at->format('M d, Y') }}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="article__body flex-grow-1">
-                        {{ Str::limit(strip_tags($blog->content), 150) }}
-                    </div>
-                    <div class="article__footer mt-3">
-                        <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-primary">
-                            Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-            @endforeach
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Wawasan & Pembaruan Hukum</h1>
+            <p class="text-xl text-blue-100">Tetap terinformasi dengan berita hukum terbaru, wawasan, dan pembaruan industri dari tim ahli kami.</p>
         </div>
-
-        <!-- Pagination -->
-        @if($blogs->hasPages())
-        <div class="row mt-5">
-            <div class="col-12 d-flex justify-content-center">
-                {{ $blogs->links() }}
-            </div>
-        </div>
-        @endif
     </div>
 </section>
+
+<!-- Category Filter -->
+<div class="sticky top-16 bg-white border-b z-30">
+    <div class="container py-4">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-4">
+                <span class="text-gray-600 whitespace-nowrap">Filter:</span>
+                <div class="flex flex-wrap gap-2">
+                    <a href="{{ route('user.blog') }}" class="category-tag {{ !request('category') ? 'active' : '' }}">Semua</a>
+                    <a href="{{ route('user.blog', ['category' => 'hukum-bisnis']) }}" class="category-tag {{ request('category') == 'hukum-bisnis' ? 'active' : '' }}">Hukum Bisnis</a>
+                    <a href="{{ route('user.blog', ['category' => 'perizinan']) }}" class="category-tag {{ request('category') == 'perizinan' ? 'active' : '' }}">Perizinan</a>
+                    <a href="{{ route('user.blog', ['category' => 'haki']) }}" class="category-tag {{ request('category') == 'haki' ? 'active' : '' }}">HAKI</a>
+                    <a href="{{ route('user.blog', ['category' => 'startup']) }}" class="category-tag {{ request('category') == 'startup' ? 'active' : '' }}">Startup</a>
+                </div>
+            </div>
+            <form action="{{ route('user.blog') }}" method="GET" class="w-full md:w-auto relative">
+                <input type="text" 
+                       name="search" 
+                       value="{{ request('search') }}"
+                       placeholder="Cari artikel..." 
+                       class="w-full md:w-64 pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if($blogs->count() > 0)
+    <!-- Featured Article -->
+    <section class="py-12 bg-gray-50">
+        <div class="container">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-lg">
+                    @if($blogs->first()->image)
+                        <img src="{{ asset('storage/' . $blogs->first()->image) }}" 
+                             class="absolute inset-0 w-full h-full object-cover" 
+                             alt="{{ $blogs->first()->title }}">
+                    @else
+                        <div class="absolute inset-0 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-newspaper text-6xl text-blue-300"></i>
+                        </div>
+                    @endif
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
+                            {{ $blogs->first()->category ?? 'Artikel' }}
+                        </span>
+                        <span class="text-gray-500 text-sm">
+                            <i class="far fa-clock mr-1"></i>
+                            {{ $blogs->first()->created_at->format('d M Y') }}
+                        </span>
+                    </div>
+                    <h2 class="text-3xl font-bold hover:text-blue-600 transition">
+                        <a href="{{ route('blog.show', $blogs->first()->id) }}">
+                            {{ $blogs->first()->title }}
+                        </a>
+                    </h2>
+                    <p class="text-gray-600 text-lg">
+                        {{ Str::limit(strip_tags($blogs->first()->content), 200) }}
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2">
+                            @if($blogs->first()->user && $blogs->first()->user->profile_picture)
+                                <img src="{{ asset('storage/' . $blogs->first()->user->profile_picture) }}" 
+                                     class="w-10 h-10 rounded-full object-cover" 
+                                     alt="{{ $blogs->first()->user->name }}">
+                            @else
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-user text-blue-300"></i>
+                                </div>
+                            @endif
+                            <div>
+                                <p class="font-medium">{{ $blogs->first()->user->name ?? 'Admin' }}</p>
+                                <p class="text-sm text-gray-500">Author</p>
+                            </div>
+                        </div>
+                        <span class="text-gray-500 text-sm">
+                            <i class="far fa-eye mr-1"></i>
+                            {{ ceil(str_word_count(strip_tags($blogs->first()->content)) / 200) }} min read
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-12">
+        <div class="container">
+            <div class="grid md:grid-cols-2 gap-8">
+                @foreach($blogs->skip(1) as $blog)
+                    @include('partials.blog-posts', ['blog' => $blog])
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            @if($blogs->hasPages())
+            <div class="mt-12">
+                {{ $blogs->appends(request()->query())->links() }}
+            </div>
+            @endif
+        </div>
+    </section>
+@else
+    <div class="py-12">
+        <div class="container">
+            <div class="text-center">
+                <div class="text-6xl text-gray-300 mb-4">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-600 mb-2">Belum ada artikel</h3>
+                <p class="text-gray-500">Artikel sedang dalam proses penulisan. Silakan kembali lagi nanti.</p>
+            </div>
+        </div>
+    </div>
+@endif
 
 @push('css')
 <style>
-.background-image-holder::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+.category-tag {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition;
+    @apply text-gray-600 hover:text-blue-600 hover:bg-blue-50;
 }
 
-.cover .container {
-    position: relative;
-    z-index: 2;
+.category-tag.active {
+    @apply bg-blue-600 text-white hover:text-white hover:bg-blue-700;
 }
 
-.masonry__item {
-    height: 100%;
-    transition: transform 0.3s ease;
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-}
-
-.masonry__item .article__body {
-    flex: 1 0 auto;
-    white-space: pre-line;
-}
-
-.masonry__item:hover {
-    transform: translateY(-10px);
-}
-
-.article__body {
-    margin-bottom: 1rem;
-}
-
-.btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #357abd;
-    border-color: #357abd;
-    color: white;
-}
-
-.article__title h2 {
-    margin-bottom: 0.5rem;
+.blog-card {
+    @apply bg-white rounded-xl overflow-hidden transition duration-300;
+    @apply border border-gray-100 hover:shadow-xl;
 }
 
 /* Pagination Styling */
 .pagination {
-    gap: 0.5rem;
+    @apply flex justify-center items-center gap-2;
 }
 
 .page-link {
-    border-radius: 4px;
-    padding: 0.75rem 1rem;
-    color: #4a90e2;
-    border: 1px solid #4a90e2;
+    @apply px-4 py-2 rounded-lg transition;
+    @apply text-gray-600 hover:text-blue-600 hover:bg-blue-50;
 }
 
 .page-item.active .page-link {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
+    @apply bg-blue-600 text-white hover:text-white hover:bg-blue-700;
 }
 
-.page-link:hover {
-    background-color: #4a90e2;
-    color: white;
+.page-item.disabled .page-link {
+    @apply text-gray-400 cursor-not-allowed hover:bg-transparent hover:text-gray-400;
 }
 </style>
 @endpush

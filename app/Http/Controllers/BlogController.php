@@ -38,10 +38,21 @@ class BlogController extends BaseController
         }
     }
 
-    public function blog()
+    public function blog(Request $request)
     {
         try {
-            $blogs = $this->blogService->getAllBlogs();
+            $category = $request->get('category');
+            $search = $request->get('search');
+            
+            $blogs = $this->blogService->getAllBlogs($category, $search);
+            
+            if ($request->ajax()) {
+                return response()->json([
+                    'html' => view('partials.blog-posts', compact('blogs'))->render(),
+                    'hasMore' => $blogs->hasMorePages()
+                ]);
+            }
+            
             return view('blog', compact('blogs'));
         } catch (\Exception $e) {
             Log::error('Failed to fetch all blogs', [
@@ -54,6 +65,7 @@ class BlogController extends BaseController
     public function show(Blog $blog)
     {
         try {
+            // Increment view count or handle analytics here if needed
             return view('blog.show', compact('blog'));
         } catch (\Exception $e) {
             Log::error('Failed to show blog', [
@@ -90,19 +102,13 @@ class BlogController extends BaseController
     public function store(BlogRequest $request)
     {
         try {
-           
-            // Log the incoming request data
             Log::info('Blog creation attempt', [
                 'user_id' => auth()->id(),
                 'request_data' => $request->except(['_token'])
             ]);
             
-            // Get validated data
             $validatedData = $request->validated();
 
-            
-
-            // Check if content is empty after stripping tags
             if (empty(trim(strip_tags($validatedData['content'])))) {
                 return back()
                     ->withInput()
@@ -152,10 +158,8 @@ class BlogController extends BaseController
         try {
             $this->authorize('update', $blog);
             
-            // Get validated data
             $validatedData = $request->validated();
 
-            // Check if content is empty after stripping tags
             if (empty(trim(strip_tags($validatedData['content'])))) {
                 return back()
                     ->withInput()

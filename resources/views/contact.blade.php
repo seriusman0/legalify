@@ -3,230 +3,171 @@
 @section('title', 'Hubungi Kami')
 
 @section('content')
-<!-- Header -->
-<section class="cover">
-<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal1.jpg') }});"></div>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 text-white mb-4">Hubungi Kami</h1>
-                <p class="lead text-white">Hubungi tim ahli hukum kami hari ini</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="contact-form-wrapper">
+                <h1 class="text-center mb-5">Hubungi Kami</h1>
+
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <form action="{{ route('contact.send') }}" method="POST" class="contact-form">
+                    @csrf
+                    <div class="mb-4">
+                        <input type="text" 
+                               class="form-control @error('name') is-invalid @enderror" 
+                               id="name" 
+                               name="name" 
+                               value="{{ old('name') }}" 
+                               placeholder="Nama wajib diisi *"
+                               required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="text" 
+                               class="form-control @error('company') is-invalid @enderror" 
+                               id="company" 
+                               name="company" 
+                               value="{{ old('company') }}" 
+                               placeholder="Nama Perusahaan">
+                        @error('company')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="text" 
+                               class="form-control @error('whatsapp') is-invalid @enderror" 
+                               id="whatsapp" 
+                               name="whatsapp" 
+                               value="{{ old('whatsapp') }}" 
+                               placeholder="Nomor WhatsApp *"
+                               required>
+                        @error('whatsapp')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <input type="email" 
+                               class="form-control @error('email') is-invalid @enderror" 
+                               id="email" 
+                               name="email" 
+                               value="{{ old('email') }}" 
+                               placeholder="Email Anda"
+                               required>
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <textarea class="form-control @error('message') is-invalid @enderror" 
+                                  id="message" 
+                                  name="message" 
+                                  rows="7" 
+                                  placeholder="Pesan atau pertanyaan Anda *"
+                                  required>{{ old('message') }}</textarea>
+                        @error('message')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            Kirim Pesan
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</section>
-
-<!-- Contact Content -->
-<section class="space--sm">
-    <div class="container">
-        <div class="row">
-            <!-- Contact Information -->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-                <div class="feature">
-                    <h3 class="mb-4">Informasi Kontak</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-4">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5>Alamat Kami</h5>
-                                    <p class="mb-0">123 Legal Street, Business District<br>Jakarta, Indonesia</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <i class="fas fa-phone fa-2x text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5>Telepon</h5>
-                                    <p class="mb-0">+62 851-7301-0820</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <i class="fas fa-envelope fa-2x text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5>Email</h5>
-                                    <p class="mb-0">andreassina9a@gmail.com</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <h3 class="mb-4 mt-5">Ikuti Kami</h3>
-                    <ul class="social-list">
-                        <li><a href="#"><i class="fab fa-facebook fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram fa-2x"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin fa-2x"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div class="col-lg-8">
-                <div class="feature">
-                    <h3 class="mb-4">Kirim Pesan</h3>
-
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if(session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    <form action="{{ route('contact.send') }}" method="POST" class="row g-3">
-                        @csrf
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                                    id="name" name="name" value="{{ old('name') }}" required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email" class="form-label">Alamat Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                    id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="subject" class="form-label">Subjek</label>
-                                <input type="text" class="form-control @error('subject') is-invalid @enderror" 
-                                    id="subject" name="subject" value="{{ old('subject') }}" required>
-                                @error('subject')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="message" class="form-label">Pesan</label>
-                                <textarea class="form-control @error('message') is-invalid @enderror" 
-                                    id="message" name="message" rows="5" required>{{ old('message') }}</textarea>
-                                @error('message')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Map Section -->
-<section class="space--sm">
-    <div class="container">
-        <div class="feature p-0">
-            <div class="ratio ratio-21x9">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.06713328245!2d106.7421135!3d-6.2295712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bf0fdad786a2!2sJakarta%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1234567890" 
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </div>
-</section>
+</div>
 
 @push('css')
 <style>
-.background-image-holder::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-
-.cover .container {
-    position: relative;
-    z-index: 2;
-}
-
-.feature {
-    height: 100%;
-    padding: 2rem;
+.contact-form-wrapper {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 3.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.text-primary {
-    color: #4a90e2 !important;
+.contact-form {
+    width: 100%;
 }
 
 .form-control {
-    padding: 0.75rem 1rem;
-    border-radius: 4px;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 5px;
     border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    height: auto;
 }
 
-.form-control:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+textarea.form-control {
+    min-height: 180px;
+    resize: vertical;
 }
 
-.social-list {
-    display: flex;
-    gap: 1.5rem;
-    padding: 0;
-    list-style: none;
+.mb-4 {
+    margin-bottom: 1.5rem !important;
 }
 
-.social-list a {
-    color: #4a90e2;
-    transition: color 0.3s ease;
+.contact-form .form-control:focus {
+    border-color: #0d2c5b;
+    box-shadow: 0 0 0 0.2rem rgba(13, 44, 91, 0.25);
+    background-color: #fff;
 }
 
-.social-list a:hover {
-    color: #2d5a8e;
+.contact-form .form-control::placeholder {
+    color: #6c757d;
 }
 
 .btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-    padding: 0.75rem 1.5rem;
+    background-color: #0d2c5b;
+    border-color: #0d2c5b;
+    padding: 0.75rem 2.5rem;
     font-weight: 500;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #2d5a8e;
-    border-color: #2d5a8e;
+    background-color: #0a2248;
+    border-color: #0a2248;
+    transform: translateY(-2px);
+}
+
+h1 {
+    color: #0d2c5b;
+    font-weight: 600;
 }
 
 .alert {
-    border-radius: 4px;
-    margin-bottom: 2rem;
+    border-radius: 5px;
 }
 </style>
 @endpush

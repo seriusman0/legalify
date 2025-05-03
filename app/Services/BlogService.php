@@ -10,14 +10,32 @@ use App\Http\Requests\BlogRequest;
 
 class BlogService
 {
-    public function getAllBlogs(int $perPage = 10)
+    public function getAllBlogs($category = null, $search = null, $perPage = 10)
     {
-        return Blog::with('user')->latest()->paginate($perPage);
+        $query = Blog::with('user')->latest();
+
+        // Apply category filter
+        if ($category) {
+            $query->where('category', $category);
+        }
+
+        // Apply search filter
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->paginate($perPage);
     }
 
     public function getUserBlogs(int $userId, int $perPage = 10)
     {
-        return Blog::where('user_id', $userId)->with('user')->latest()->paginate($perPage);
+        return Blog::where('user_id', $userId)
+                  ->with('user')
+                  ->latest()
+                  ->paginate($perPage);
     }
 
     public function createBlog(BlogRequest $request)
@@ -202,5 +220,15 @@ class BlogService
         }
 
         return $slug;
+    }
+
+    public function getCategories()
+    {
+        return [
+            'hukum-bisnis' => 'Hukum Bisnis',
+            'perizinan' => 'Perizinan',
+            'haki' => 'HAKI',
+            'startup' => 'Startup'
+        ];
     }
 }

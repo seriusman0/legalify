@@ -11,63 +11,103 @@ class PageController extends Controller
     public function services()
     {
         try {
-            // Check if file exists
-            $filePath = public_path('legalify.id.xlsx');
-            if (!file_exists($filePath)) {
-                throw new \Exception("Excel file not found at: " . $filePath);
-            }
-
-            // Load the spreadsheet
-            $spreadsheet = IOFactory::load($filePath);
-            $worksheet = $spreadsheet->getActiveSheet();
-            
             $services = [];
-            $highestRow = $worksheet->getHighestRow();
-            $highestColumn = $worksheet->getHighestColumn();
+            $processSteps = [];
+            $excelFile = public_path('legalify.id.xlsx');
             
-            // Debug information
-            \Log::info('Excel file loaded successfully');
-            \Log::info("Highest row: {$highestRow}, Highest column: {$highestColumn}");
-            
-            // Start from row 2 to skip header
-            for ($row = 2; $row <= $highestRow; $row++) {
-                $title = trim($worksheet->getCell('A' . $row)->getValue() ?? '');
-                $description = trim($worksheet->getCell('B' . $row)->getValue() ?? '');
+            if (file_exists($excelFile)) {
+                $spreadsheet = IOFactory::load($excelFile);
+                $worksheet = $spreadsheet->getActiveSheet();
+                $highestRow = $worksheet->getHighestRow();
                 
-                // Debug row data
-                \Log::info("Row {$row} - Title: {$title}, Description: {$description}");
+                $currentCategory = null;
+                $currentPackages = [];
+                $inProcessSection = false;
                 
-                // Get features from columns C onwards
-                $features = [];
-                $currentColumn = 'C';
-                while ($currentColumn <= $highestColumn) {
-                    $feature = trim($worksheet->getCell($currentColumn . $row)->getValue() ?? '');
-                    if (!empty($feature)) {
-                        $features[] = $feature;
+                for ($row = 2; $row <= $highestRow; $row++) {
+                    $title = trim($worksheet->getCell('A' . $row)->getValue() ?? '');
+                    $description = trim($worksheet->getCell('B' . $row)->getValue() ?? '');
+                    
+                    // Get features from columns C to G
+                    $features = [];
+                    for ($col = 'C'; $col <= 'G'; $col++) {
+                        $value = trim($worksheet->getCell($col . $row)->getValue() ?? '');
+                        if (!empty($value)) {
+                            $features[] = $value;
+                        }
                     }
-                    $currentColumn++;
+                    
+                    // Handle process section
+                    if ($title === 'Alur Proses') {
+                        $inProcessSection = true;
+                        continue;
+                    }
+                    
+                    if ($inProcessSection && !empty($title)) {
+                        if (preg_match('/^\d+\./', $title)) {
+                            $processSteps[] = [
+                                'title' => $title,
+                                'description' => $description
+                            ];
+                        }
+                        continue;
+                    }
+                    
+                    // Skip empty rows
+                    if (empty($title) && empty($description) && empty($features)) {
+                        continue;
+                    }
+                    
+                    // New category starts when title is not empty
+                    if (!empty($title)) {
+                        // Add previous category if exists
+                        if ($currentCategory && !empty($currentPackages)) {
+                            $services[] = [
+                                'title' => $currentCategory,
+                                'packages' => $currentPackages,
+                                'is_process' => false
+                            ];
+                        }
+                        $currentCategory = $title;
+                        $currentPackages = [];
+                    }
+                    
+                    // Add package to current category
+                    if (!empty($description)) {
+                        $currentPackages[] = [
+                            'type' => $description,
+                            'features' => $features,
+                            'description' => $features[1] ?? '',
+                            'price_range' => $features[3] ?? '',
+                            'final_price' => $features[4] ?? '',
+                            'main_features' => array_slice($features, 0, -3)
+                        ];
+                    }
                 }
                 
-                // Debug features
-                \Log::info("Row {$row} - Features: " . json_encode($features));
-                
-                if (!empty($title)) {
+                // Add last category
+                if ($currentCategory && !empty($currentPackages)) {
                     $services[] = [
-                        'title' => $title,
-                        'description' => $description,
-                        'features' => $features
+                        'title' => $currentCategory,
+                        'packages' => $currentPackages,
+                        'is_process' => false
+                    ];
+                }
+                
+                // Add process section at the end
+                if (!empty($processSteps)) {
+                    $services[] = [
+                        'title' => 'Alur Proses',
+                        'steps' => $processSteps,
+                        'is_process' => true
                     ];
                 }
             }
-
-            \Log::info('Total services loaded: ' . count($services));
-            return view('services', compact('services'));
             
+            return view('services', compact('services'));
         } catch (\Exception $e) {
             \Log::error('Error loading services: ' . $e->getMessage());
-            \Log::error($e->getTraceAsString());
-            $services = [];
-            return view('services', compact('services'))->with('error', 'Unable to load services data: ' . $e->getMessage());
+            return view('services', ['services' => [], 'error' => 'Unable to load services data.']);
         }
     }
 
@@ -85,17 +125,19 @@ class PageController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'whatsapp' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ], [
             'name.required' => 'Nama lengkap wajib diisi.',
             'name.max' => 'Nama lengkap tidak boleh lebih dari :max karakter.',
+            'whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
+            'whatsapp.max' => 'Nomor WhatsApp tidak boleh lebih dari :max karakter.',
             'email.required' => 'Alamat email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'email.max' => 'Alamat email tidak boleh lebih dari :max karakter.',
-            'subject.required' => 'Subjek wajib diisi.',
-            'subject.max' => 'Subjek tidak boleh lebih dari :max karakter.',
+            'company.max' => 'Nama perusahaan tidak boleh lebih dari :max karakter.',
             'message.required' => 'Pesan wajib diisi.',
         ]);
 

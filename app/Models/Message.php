@@ -11,8 +11,9 @@ class Message extends Model
 
     protected $fillable = [
         'name',
+        'company',
+        'whatsapp',
         'email',
-        'subject',
         'message',
         'status'
     ];

@@ -1,202 +1,135 @@
 @extends('layouts.app')
 
-@php
-use Illuminate\Support\Str;
-@endphp
-
 @section('title', 'Selamat Datang')
 
 @section('content')
 <!-- Hero Section -->
-<section class="cover cover-features">
-<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal1.jpg') }});"></div>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold text-white mb-4">Urus Legalitas Usaha Tanpa Ribet – Mulai dari PT, CV, hingga Merek Dagang</h1>
-                <p class="lead text-white mb-5">Kami bantu Anda mendirikan badan usaha, mengurus perizinan, hingga dokumen hukum dengan proses yang cepat, transparan, dan terpercaya. Cocok untuk UMKM, startup, hingga perseorangan yang ingin legalitas usaha beres tanpa drama.</p>
-                <div class="d-flex gap-3">
-                    <a href="{{ route('services') }}" class="btn--primary">
-                        <i class="fas fa-briefcase me-2"></i>Jelajahi Layanan Kami
+<section class="relative bg-gradient-to-r from-blue-600 to-blue-700 py-24">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="container relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+            <div class="text-white">
+                <h1 class="text-5xl font-bold leading-tight mb-6">
+                    Urus Legalitas Usaha Tanpa Ribet
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    Kami bantu Anda mendirikan badan usaha, mengurus perizinan, hingga dokumen hukum dengan proses yang cepat, transparan, dan terpercaya.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="{{ route('services') }}" class="btn btn-primary">
+                        Mulai Sekarang
                     </a>
-                    <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-                        <i class="fas fa-phone me-2"></i>Hubungi Kami
+                    <a href="{{ route('contact') }}" class="btn btn-outline text-white border-white hover:bg-white/10">
+                        Konsultasi Gratis
                     </a>
                 </div>
+            </div>
+            <div class="relative hidden lg:block">
+                <div class="absolute -top-12 -right-12 w-64 h-64 bg-blue-400/20 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-8 -left-8 w-48 h-48 bg-blue-500/20 rounded-full blur-xl"></div>
+                <img src="{{ asset('assets/template/img/legal1.jpg') }}" alt="Legal Services" class="relative z-10 rounded-2xl shadow-xl w-full">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Featured Services -->
-<section class="space--sm">
+<!-- Features Section -->
+<section class="py-20 bg-gray-50">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center mb-5">
-                <h2 class="h1 mb-4">Layanan Kami</h2>
-                <p class="lead">Solusi hukum komprehensif untuk individu dan bisnis</p>
-            </div>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Mengapa Memilih Kami?</h2>
+            <p class="text-lg text-gray-600">Urus Legalitas Usaha Tanpa Ribet – Mulai dari PT, CV, hingga Merek Dagang
+            </p>
         </div>
         
-        <div class="row">
-            <div class="col-md-4">
-                <div class="feature text-center">
-                    <div class="mb-4">
-                        <i class="fas fa-balance-scale fa-3x text-primary"></i>
-                    </div>
-                    <h3>Hukum Perusahaan</h3>
-                    <p>Panduan ahli untuk bisnis dalam pembentukan, kontrak, dan masalah kepatuhan.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-clock text-2xl"></i>
                 </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Proses Cepat</h3>
+                <p class="text-gray-600">Pengurusan dokumen legal yang cepat dan efisien dengan timeline yang jelas</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature text-center">
-                    <div class="mb-4">
-                        <i class="fas fa-gavel fa-3x text-primary"></i>
-                    </div>
-                    <h3>Litigasi</h3>
-                    <p>Representasi kuat dalam proses pengadilan dan penyelesaian sengketa.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-2xl"></i>
                 </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Terpercaya</h3>
+                <p class="text-gray-600">Tim legal berpengalaman yang siap membantu kebutuhan bisnis Anda</p>
             </div>
 
-            <div class="col-md-4">
-                <div class="feature text-center">
-                    <div class="mb-4">
-                        <i class="fas fa-shield-alt fa-3x text-primary"></i>
-                    </div>
-                    <h3>Kekayaan Intelektual</h3>
-                    <p>Perlindungan untuk inovasi Anda melalui paten, merek dagang, dan hak cipta.</p>
-                    <a href="{{ route('services') }}" class="btn--primary">Selengkapnya</a>
+            <div class="feature-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-comments text-2xl"></i>
                 </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Konsultasi Gratis</h3>
+                <p class="text-gray-600">Dapatkan konsultasi gratis untuk memahami kebutuhan legal bisnis Anda</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Latest Blog Posts -->
-<section class="space--sm bg-light">
+<!-- Services Section -->
+<section class="py-20">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center mb-5">
-                <h2 class="h1 mb-4">Wawasan Terbaru</h2>
-                <p class="lead">Tetap terinformasi dengan keahlian hukum dan pembaruan industri kami</p>
-            </div>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Layanan Kami</h2>
+            <p class="text-lg text-gray-600">Urus Legalitas Usaha Tanpa Ribet – Mulai dari PT, CV, hingga Merek Dagang
+            </p>
         </div>
         
-        <div class="row">
-            
-            @foreach($latestBlogs as $blog)
-            <div class="col-md-4 mb-4">
-                <article class="masonry__item d-flex flex-column">
-                    @if($blog->image)
-                        <img src="{{ asset('.storage/' . $blog->image) }}" class="img-fluid mb-3" alt="{{ e($blog->title) }}">
-                    @endif
-                    <div class="article__title">
-                        <h2 class="h4">{{ e($blog->title) }}</h2>
-                        <div class="text-muted mb-3">
-                            <small>
-                                <i class="fas fa-calendar-alt me-2"></i>
-                                {{ $blog->created_at->format('M d, Y') }}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="article__body flex-grow-1">
-                        {!! nl2br(e(Str::limit(strip_tags($blog->content), 150))) !!}
-                    </div>
-                    <div class="article__footer mt-3">
-                        <a href="{{ route('blog.show', $blog->id) }}" class="btn btn-primary">
-                            Baca Selengkapnya <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </article>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="service-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-building text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Pendirian PT</h3>
+                <p class="text-gray-600 mb-6">Layanan pendirian PT dengan proses cepat dan terpercaya</p>
+                <a href="{{ route('services') }}" class="text-blue-600 font-medium hover:text-blue-700 inline-flex items-center gap-2">
+                    Pelajari Lebih Lanjut
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            @endforeach
-        </div>
-    </div>
-</section>
 
-<!-- Call to Action -->
-<section class="cover">
-<div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal2.jpg') }});"></div>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h2 class="display-4 text-white mb-4">Siap Untuk Memulai?</h2>
-                <p class="lead text-white mb-4">Hubungi kami hari ini untuk konsultasi dengan ahli hukum kami.</p>
-                <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-                    <i class="fas fa-paper-plane me-2"></i>Hubungi Kami
+            <div class="service-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-file-signature text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Pendirian CV</h3>
+                <p class="text-gray-600 mb-6">Layanan pendirian CV dengan proses mudah dan terpercaya</p>
+                <a href="{{ route('services') }}" class="text-blue-600 font-medium hover:text-blue-700 inline-flex items-center gap-2">
+                    Pelajari Lebih Lanjut
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="service-card">
+                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-trademark text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Merek Dagang</h3>
+                <p class="text-gray-600 mb-6">Layanan pendaftaran merek dagang untuk bisnis Anda</p>
+                <a href="{{ route('services') }}" class="text-blue-600 font-medium hover:text-blue-700 inline-flex items-center gap-2">
+                    Pelajari Lebih Lanjut
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-@push('css')
-<style>
-.background-image-holder::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.cover .container {
-    position: relative;
-    z-index: 2;
-}
-
-.feature {
-    transition: transform 0.3s ease;
-}
-
-.feature:hover {
-    transform: translateY(-10px);
-}
-
-.masonry__item {
-    transition: transform 0.3s ease;
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.masonry__item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.article__body {
-    color: #6c757d;
-    line-height: 1.6;
-}
-
-.btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-    padding: 0.75rem 1.25rem;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #357abd;
-    border-color: #357abd;
-    transform: translateY(-2px);
-}
-
-.article__title h2 {
-    color: #2d3748;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-</style>
-@endpush
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 to-blue-700 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="container relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-4">Siap Memulai?</h2>
+            <p class="text-xl text-blue-100 mb-8">Konsultasikan kebutuhan legal bisnis Anda dengan tim kami</p>
+            <a href="{{ route('contact') }}" class="btn btn-primary bg-white text-blue-600 hover:bg-blue-50">
+                Konsultasi Gratis
+            </a>
+        </div>
+    </div>
+</section>
 @endsection

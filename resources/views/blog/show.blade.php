@@ -4,8 +4,8 @@
 
 @section('content')
 <!-- Blog Header -->
-<section class="cover" style="padding: 6rem 0;">
-    <div class="background-image-holder" style="background-image: url({{ asset('assets/template/img/legal2.jpg') }});"></div>
+<section class="cover position-relative" style="padding: 6rem 0; background-color: #1a1a1a;">
+    <div class="background-image-holder" style="background-image: url({{ asset('assets/images/author.png') }}); opacity: 0.4;"></div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center">
@@ -26,13 +26,13 @@
 </section>
 
 <!-- Blog Content -->
-<section class="space--sm">
+<section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <article class="masonry__item">
                     @if($blog->image)
-                        <img src="{{ asset('.storage/' . $blog->image) }}" class="img-fluid mb-4 rounded" alt="{{ $blog->title }}">
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="img-fluid mb-4 rounded" alt="{{ $blog->title }}">
                     @endif
                     
                     <div class="article__body blog-content">
@@ -70,29 +70,50 @@
 
 @push('css')
 <style>
-.background-image-holder::after {
-    content: '';
+.background-image-holder {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
 }
 
 .cover .container {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+}
+
+.masonry__item {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    margin-top: -4rem;
+    padding: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .masonry__item {
+        padding: 1.5rem;
+        margin-top: -2rem;
+    }
 }
 
 .article__body {
     font-size: 1.1rem;
     line-height: 1.8;
+    color: #2c3e50;
+    max-width: 100%;
 }
 
-.article__body p {
+.article__body > * {
     margin-bottom: 1.5rem;
+}
+
+.article__body > *:last-child {
+    margin-bottom: 0;
 }
 
 .blog-content {
