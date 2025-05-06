@@ -79,25 +79,7 @@
             <p class="text-lg text-gray-600">Dipimpin oleh profesional yang berpengalaman dalam bidang legal bisnis</p>
         </div>
         
-        <div class="max-w-lg mx-auto">
-            <div class="bg-white p-8 rounded-2xl shadow-sm text-center">
-                <img src="{{ asset('assets/images/author.png') }}" alt="Andreas" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover">
-                <h3 class="text-2xl font-semibold text-gray-900 mb-2">Andreas</h3>
-                <p class="text-blue-600 mb-4">Founder & Legal Consultant</p>
-                <p class="text-gray-600 mb-6">Berpengalaman lebih dari 5 tahun dalam bidang konsultasi legal dan pendirian badan usaha. Berkomitmen untuk memberikan solusi terbaik bagi setiap klien.</p>
-                <div class="flex justify-center gap-4">
-                    <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+       
     </div>
 </section>
 
