@@ -12,7 +12,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
         <img src="{{ asset('.storage/' . Auth::user()->profile_picture) }}" 
-                         alt="Profile Picture" 
+                         alt="" 
                          class="img-circle elevation-2"
                          style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;">
         </div>

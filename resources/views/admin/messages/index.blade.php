@@ -49,8 +49,9 @@
                                         <th style="width: 10px">#</th>
                                         <th>Status</th>
                                         <th>Nama</th>
+                                        <th>Perusahaan</th>
+                                        <th>WhatsApp</th>
                                         <th>Email</th>
-                                        <th>Subjek</th>
                                         <th>Tanggal</th>
                                         <th style="width: 150px">Aksi</th>
                                     </tr>
@@ -67,8 +68,9 @@
                                                 @endif
                                             </td>
                                             <td>{{ $message->name }}</td>
+                                            <td>{{ $message->company ?? '-' }}</td>
+                                            <td>{{ $message->whatsapp }}</td>
                                             <td>{{ $message->email }}</td>
-                                            <td>{{ $message->subject }}</td>
                                             <td>{{ $message->created_at->format('d M Y H:i') }}</td>
                                             <td>
                                                 <div class="btn-group">
@@ -109,7 +111,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">Tidak ada pesan</td>
+                                            <td colspan="8" class="text-center">Tidak ada pesan</td>
                                         </tr>
                                     @endforelse
                                 </tbody>

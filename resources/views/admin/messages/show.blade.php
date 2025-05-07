@@ -75,8 +75,16 @@
                                             <td>{{ $message->created_at->format('d M Y H:i') }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Subjek</th>
-                                            <td>{{ $message->subject }}</td>
+                                            <th>Perusahaan</th>
+                                            <td>{{ $message->company ?? '-' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>WhatsApp</th>
+                                            <td>
+                                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $message->whatsapp) }}" target="_blank">
+                                                    {{ $message->whatsapp }}
+                                                </a>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

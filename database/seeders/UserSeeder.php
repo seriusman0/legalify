@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@legalify.com',
+            'email' => 'admin@legalify.id',
             'password' => Hash::make('password123')
         ]);
         $admin->assignRole('admin');
@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         // Create editor user
         $editor = User::create([
             'name' => 'Editor User',
-            'email' => 'editor@legalify.com',
+            'email' => 'editor@legalify.id',
             'password' => Hash::make('password123')
         ]);
         $editor->assignRole('editor');
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
         // Create author user
         $author = User::create([
             'name' => 'Author User',
-            'email' => 'author@legalify.com',
+            'email' => 'author@legalify.id',
             'password' => Hash::make('password123')
         ]);
         $author->assignRole('author');

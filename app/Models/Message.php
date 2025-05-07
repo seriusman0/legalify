@@ -14,6 +14,7 @@ class Message extends Model
         'company',
         'whatsapp',
         'email',
+        'subject',
         'message',
         'status'
     ];

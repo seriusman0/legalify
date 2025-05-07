@@ -15,7 +15,7 @@ class CreateAdminUser extends Command
     {
         $user = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@legalify.com',
+            'email' => 'admin@legalify.id',
             'password' => Hash::make('admin123')
         ]);
 
