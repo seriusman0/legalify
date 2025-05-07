@@ -12,7 +12,10 @@ class DatabaseSeeder extends Seeder
             RoleAndPermissionsSeeder::class,
             UserSeeder::class,
             PtCvBlogSeeder::class,
-            LangkahMendirikanPtSeeder::class
+            LangkahMendirikanPtSeeder::class,
+            VirtualOfficeSeeder::class,
+            KesalahanFatalSeeder::class,
+            PtPeroranganSeeder::class
         ]);
     }
 }
