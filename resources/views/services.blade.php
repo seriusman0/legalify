@@ -10,15 +10,7 @@
         <div class="max-w-3xl mx-auto text-center">
             <h1 class="text-4xl font-bold text-white mb-6">Solusi Legalitas Bisnis Terpercaya</h1>
             <p class="text-xl text-blue-100 mb-8">Layanan pendirian dan perizinan usaha yang disesuaikan dengan kebutuhan Anda</p>
-            <div class="bg-white rounded-xl p-4 shadow-lg max-w-2xl mx-auto">
-                <form class="flex gap-4">
-                    <input type="text" class="flex-1 px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-blue-500" placeholder="Cari layanan atau perizinan...">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-search mr-2"></i>
-                        Cari
-                    </button>
-                </form>
-            </div>
+            
         </div>
     </div>
 </section>
