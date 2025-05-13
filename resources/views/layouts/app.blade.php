@@ -153,78 +153,81 @@
                 </a>
                 <div class="hidden lg:flex lg:items-center lg:space-x-8">
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'text-blue-600' : '' }}">Beranda</a>
-                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'text-blue-600' : '' }}">Tentang Kami</a>
-                    <div class="dropdown">
-                        <button class="nav-link inline-flex items-center {{ request()->routeIs('services*') ? 'text-blue-600' : '' }}" 
-                            type="button" 
-                            id="servicesDropdown" 
-                            data-bs-toggle="dropdown" 
-                            aria-expanded="false">
+                    <div class="group relative">
+                        <button class="nav-link inline-flex items-center {{ request()->routeIs('services*') ? 'text-blue-600' : '' }}">
                             Layanan
-                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="ml-2 h-4 w-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-start p-0 rounded-lg shadow-xl bg-white" style="min-width: 320px;" aria-labelledby="servicesDropdown">
-                            <div class="p-4">
-                                <div class="mb-4">
-                                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Pendirian Badan Usaha</h3>
-                                    <a href="{{ route('services') }}#pt" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-building w-5 mr-3 text-gray-400"></i>
-                                        <span>PT</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#cv" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-store w-5 mr-3 text-gray-400"></i>
-                                        <span>CV</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#pt-perorangan" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-user-tie w-5 mr-3 text-gray-400"></i>
-                                        <span>PT Perorangan</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#pt-pma" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-globe w-5 mr-3 text-gray-400"></i>
-                                        <span>PT PMA</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#badan-lain" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-users w-5 mr-3 text-gray-400"></i>
-                                        <span>Badan Lain</span>
-                                    </a>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Perizinan & Sertifikasi</h3>
-                                    <a href="{{ route('services') }}#izin-usaha" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-certificate w-5 mr-3 text-gray-400"></i>
-                                        <span>Izin Usaha dan Sertifikasi</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#merek" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-trademark w-5 mr-3 text-gray-400"></i>
-                                        <span>Merek</span>
-                                    </a>
-                                </div>
+                        <div class="hidden group-hover:block absolute left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-7xl bg-white shadow-xl rounded-lg py-8 z-50">
+                            <div class="container mx-auto px-8">
+                                <div class="grid grid-cols-3 gap-12">
+                                    <div>
+                                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Pendirian Badan Usaha</h3>
+                                        <div class="space-y-2">
+                                            <a href="{{ route('services') }}#pt" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-building w-5 mr-3 text-gray-400"></i>
+                                                <span>PT</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#cv" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-store w-5 mr-3 text-gray-400"></i>
+                                                <span>CV</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#pt-perorangan" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-user-tie w-5 mr-3 text-gray-400"></i>
+                                                <span>PT Perorangan</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#pt-pma" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-globe w-5 mr-3 text-gray-400"></i>
+                                                <span>PT PMA</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#badan-lain" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-users w-5 mr-3 text-gray-400"></i>
+                                                <span>Badan Lain</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Perizinan & Sertifikasi</h3>
+                                        <div class="space-y-2">
+                                            <a href="{{ route('services') }}#izin-usaha" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-certificate w-5 mr-3 text-gray-400"></i>
+                                                <span>Izin Usaha dan Sertifikasi</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#merek" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-trademark w-5 mr-3 text-gray-400"></i>
+                                                <span>Merek</span>
+                                            </a>
+                                        </div>
+                                    </div>
 
-                                <div class="mb-4">
-                                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Layanan Lainnya</h3>
-                                    <a href="{{ route('services') }}#perubahan" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-exchange-alt w-5 mr-3 text-gray-400"></i>
-                                        <span>Perubahan dan Penutupan</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#legal-drafting" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-file-contract w-5 mr-3 text-gray-400"></i>
-                                        <span>Legal Drafting</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#virtual-office" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-building-user w-5 mr-3 text-gray-400"></i>
-                                        <span>Virtual Office</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#retainer-legal" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-gavel w-5 mr-3 text-gray-400"></i>
-                                        <span>Retainer Legal</span>
-                                    </a>
-                                    <a href="{{ route('services') }}#perpajakan" class="dropdown-item flex items-center px-3 py-2 text-sm text-gray-700 rounded-md">
-                                        <i class="fas fa-file-invoice-dollar w-5 mr-3 text-gray-400"></i>
-                                        <span>Perpajakan</span>
-                                    </a>
+                                    <div>
+                                        <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">Layanan Lainnya</h3>
+                                        <div class="space-y-2">
+                                            <a href="{{ route('services') }}#perubahan" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-exchange-alt w-5 mr-3 text-gray-400"></i>
+                                                <span>Perubahan dan Penutupan</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#legal-drafting" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-file-contract w-5 mr-3 text-gray-400"></i>
+                                                <span>Legal Drafting</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#virtual-office" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-building-user w-5 mr-3 text-gray-400"></i>
+                                                <span>Virtual Office</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#retainer-legal" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-gavel w-5 mr-3 text-gray-400"></i>
+                                                <span>Retainer Legal</span>
+                                            </a>
+                                            <a href="{{ route('services') }}#perpajakan" class="dropdown-item flex items-center text-sm text-gray-700 hover:text-blue-600">
+                                                <i class="fas fa-file-invoice-dollar w-5 mr-3 text-gray-400"></i>
+                                                <span>Perpajakan</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -253,10 +256,6 @@
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50' : '' }}">
                         <i class="fas fa-home w-5 mr-3"></i>
                         Beranda
-                    </a>
-                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'text-blue-600 bg-blue-50' : '' }}">
-                        <i class="fas fa-info-circle w-5 mr-3"></i>
-                        Tentang Kami
                     </a>
                     <div>
                         <button class="flex items-center w-full text-left nav-link {{ request()->routeIs('services') ? 'text-blue-600 bg-blue-50' : '' }}" onclick="toggleServiceMenu()">
@@ -540,81 +539,77 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Bootstrap Dropdown Customization */
-        .dropdown-menu {
-            display: none;
-            margin-top: 0.5rem;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            min-width: 20rem;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.2s ease, transform 0.2s ease;
+        /* Navigation Hover Menu */
+        .group {
+            position: relative;
         }
-        
-        .dropdown-menu.show {
+
+        .group:hover .group-hover\:block {
             display: block;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) translateX(-50%);
+            pointer-events: auto;
+            transition-delay: 100ms;
         }
 
-        /* Animation Classes */
-        .animate-fade-in {
-            animation: fadeIn 0.2s ease-in-out;
+        .group:not(:hover) .group-hover\:block {
+            transition-delay: 100ms;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .group:hover .group-hover\:rotate-180 {
+            transform: rotate(180deg);
         }
 
-        /* Dropdown Items Styling */
-        .dropdown-item {
-            transition: all 0.2s ease;
-            white-space: normal;
-            padding: 0.5rem 1rem;
-        }
-        
-        .dropdown-item:hover, 
-        .dropdown-item:focus {
-            background-color: #eef2ff !important;
-            color: #2563eb !important;
-        }
-
-        .dropdown-item:active {
-            background-color: #dbeafe !important;
-            color: #2563eb !important;
-        }
-
-        /* Remove default Bootstrap padding for our custom items */
-        .dropdown-menu .p-4 .dropdown-item {
-            padding: 0.5rem 0.75rem;
-        }
-
-        /* Bootstrap Overrides */
-        .dropdown-toggle::after {
-            display: none;
-        }
-        
+        /* Navigation Links */
         .nav-link {
             display: inline-flex;
             align-items: center;
+            padding: 0.75rem;
+            transition: all 0.2s ease;
+            position: relative;
+            font-weight: 500;
         }
 
-        /* Positioning Fixes */
-        .dropdown {
-            position: relative;
+        .nav-link:hover {
+            color: #2563eb;
         }
-        
-        .dropdown-menu-start {
-            left: 0;
-            right: auto;
+
+        /* Dropdown Menu */
+        .group-hover\:block {
+            opacity: 0;
+            transform: translateY(-10px) translateX(-50%);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Dropdown Items */
+        .dropdown-item {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            margin: 0.25rem 0;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f9ff;
+            color: #2563eb;
+            transform: translateX(4px);
+        }
+
+        .dropdown-item:hover i {
+            color: #2563eb;
+            transform: scale(1.1);
+            transition: all 0.2s ease;
+        }
+
+        /* Section Headers */
+        .text-xs.font-semibold.text-gray-400.uppercase {
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
         }
     </style>
 </body>

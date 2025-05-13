@@ -33,48 +33,6 @@
     </div>
 </section>
 
-<!-- Features Section -->
-<section class="py-20 bg-gray-50">
-    <div class="container">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Mengapa Memilih Legalify ID?</h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="feature-card">
-                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-building-shield text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Layanan Legalitas Usaha Terpadu</h3>
-                <p class="text-gray-600">Legalify ID menghadirkan solusi menyeluruh untuk kebutuhan legalitas usaha Anda—mulai dari pendirian PT, CV, PMA, hingga pengurusan izin usaha, virtual office, HKI, perpajakan, dan perjanjian hukum. Semua dapat diakses dalam satu platform praktis dan terpercaya.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-user-tie text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Didukung Tim Legal Profesional</h3>
-                <p class="text-gray-600">Seluruh layanan Legalify ID dikerjakan oleh tim legal yang kompeten, berpengalaman, dan memahami regulasi bisnis di Indonesia. Kami memastikan setiap dokumen dan proses sesuai dengan ketentuan hukum yang berlaku.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-bolt text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Cepat, Transparan, dan Efisien</h3>
-                <p class="text-gray-600">Kami mengutamakan kecepatan tanpa mengorbankan akurasi. Dengan sistem kerja yang terstruktur dan transparan, Anda dapat memantau setiap progres layanan tanpa khawatir biaya tambahan tersembunyi.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                    <i class="fas fa-handshake text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Pendamping Legal Jangka Panjang</h3>
-                <p class="text-gray-600">Legalify ID tidak hanya membantu di awal pendirian usaha. Kami hadir sebagai mitra legal Anda dalam pengelolaan dan pengembangan bisnis jangka panjang, melalui layanan retainer hukum dan pembaruan legalitas secara berkala.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Services Section -->
 <section class="py-20">
