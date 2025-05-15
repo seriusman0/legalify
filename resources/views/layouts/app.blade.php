@@ -12,8 +12,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Vite Assets -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Pre-built CSS and JS assets for production without npm -->
+    <link rel="stylesheet" href="{{ asset('build/assets/app-v5-yyCMD.css') }}">
+    <script src="{{ asset('build/assets/app-BaeQSOhO.js') }}" defer></script>
     
     <!-- WhatsApp Button Styles -->
     <style>
