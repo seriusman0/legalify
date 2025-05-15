@@ -213,7 +213,7 @@
     </main>
 
     <footer class="bg-white border-t">
-        <div class="container py-16">
+        <div class="py-16 px-8 w-full max-w-full mx-auto">
             <div class="grid md:grid-cols-4 gap-8">
                 <div class="space-y-6">
                     <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="h-10">
@@ -264,7 +264,7 @@
             
             <hr class="my-8 border-gray-200">
             
-            <div class="text-center text-gray-600">
+            <div class="text-left text-gray-600 w-full max-w-full">
                 <p>&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
             </div>
         </div>
