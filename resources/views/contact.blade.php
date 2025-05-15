@@ -3,11 +3,12 @@
 @section('title', 'Hubungi Kami')
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            <div class="contact-form-wrapper">
-                <h1 class="text-center mb-5">Hubungi Kami</h1>
+<div class="contact-page-wrapper">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="contact-form-wrapper">
+                    <h1 class="text-center mb-5">Hubungi Kami</h1>
 
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -101,6 +102,23 @@
 
 @push('css')
 <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+body > .container.py-5 {
+    padding: 1rem;
+}
+
 .contact-form-wrapper {
     background: #fff;
     padding: 3.5rem;
@@ -164,6 +182,8 @@ textarea.form-control {
 h1 {
     color: #0d2c5b;
     font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .alert {

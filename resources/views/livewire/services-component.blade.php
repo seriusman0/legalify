@@ -11,9 +11,9 @@
     </style>
 
     <section class="bg-blue-700 py-12">
-        <div class="max-w-4xl mx-auto px-4">
-            <h1 class="text-2xl md:text-3xl font-bold text-white text-center">Layanan Kami</h1>
-            <p class="text-blue-100 text-center mt-2">Pilih layanan yang sesuai dengan kebutuhan bisnis Anda</p>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Layanan Kami</h2>
+            <p class="text-blue-100 text-center text-gray-900 mt-2">Pilih layanan yang sesuai dengan kebutuhan bisnis Anda</p>
         </div>
     </section>
 
@@ -49,7 +49,7 @@
                 @if($services->isEmpty())
                     <p class="text-center text-gray-500">Tidak ada layanan tersedia untuk kategori ini.</p>
                 @else
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($services as $service)
                             <article 
                                 wire:key="service-{{ $service->id_service }}"
