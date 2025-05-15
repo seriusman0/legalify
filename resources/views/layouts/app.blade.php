@@ -12,6 +12,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Vite Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <!-- WhatsApp Button Styles -->
     <style>
         @keyframes ping {
@@ -62,84 +65,6 @@
             animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
-
-    <!-- Compiled Assets -->
-    <link href="{{ asset('build/assets/app-hUMPalw1.css') }}" rel="stylesheet">
-    <script src="{{ asset('build/assets/app-BaeQSOhO.js') }}" defer></script>
-    
-    <!-- Navigation Styles -->
-    <style>
-        .nav-link {
-            color: #4B5563;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-link:hover {
-            color: #2563EB;
-        }
-        .nav-cta {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #2563EB;
-            color: white;
-            border-radius: 0.375rem;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-        .nav-cta:hover {
-            background-color: #1D4ED8;
-            color: white;
-        }
-        .footer-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 1rem;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-        .footer-links a {
-            color: #4B5563;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: #2563EB;
-        }
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background-color: #F3F4F6;
-            color: #4B5563;
-            border-radius: 9999px;
-            transition: all 0.2s;
-        }
-        .social-link:hover {
-            background-color: #2563EB;
-            color: white;
-        }
-    </style>
-    
-    <!-- Ensure mobile menu script loads before CSS -->
-    <script>
-        // Initialize mobile menu state
-        window.addEventListener('load', function() {
-            const mobileNav = document.getElementById('mobileNav');
-            if (mobileNav) {
-                mobileNav.classList.add('hidden');
-            }
-        });
-    </script>
     
     @stack('css')
 </head>
@@ -374,8 +299,7 @@
                 
                 <div>
                     <h5 class="footer-title">Company</h5>
-                        <ul class="footer-links">
-                        <li><a href="{{ route('about') }}">About Us</a></li>
+                    <ul class="footer-links">
                         <li><a href="{{ route('services') }}">Services</a></li>
                         <li><a href="{{ route('user.blog') }}">Blog</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
@@ -429,8 +353,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Mobile menu toggle
-        function toggleServiceMenu(event) {
-            event.stopPropagation();
+        function toggleServiceMenu() {
             const submenu = document.getElementById('serviceSubmenu');
             const arrow = document.getElementById('serviceArrow');
             const isHidden = submenu.classList.contains('hidden');
@@ -442,18 +365,8 @@
             arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
         }
 
-        // Initialize dropdowns and handle animations
+        // Initialize mobile menu
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Bootstrap dropdowns
-            var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'))
-            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-                return new bootstrap.Dropdown(dropdownToggleEl, {
-                    offset: [0, 10],
-                    boundary: 'viewport'
-                })
-            });
-
-            // Handle mobile menu
             const mobileMenuBtn = document.getElementById('mobileMenuButton');
             const mobileNav = document.getElementById('mobileNav');
             
@@ -463,8 +376,7 @@
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 
                 // Toggle mobile menu
-                mobileMenuBtn.addEventListener('click', function(event) {
-                    event.stopPropagation();
+                mobileMenuBtn.addEventListener('click', function() {
                     const isOpen = this.getAttribute('data-menu-open') === 'true';
                     
                     // Toggle menu visibility
@@ -501,116 +413,7 @@
                     }
                 });
             }
-
-            // Add animation class when dropdown is shown
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.addEventListener('show.bs.dropdown', function() {
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    menu.classList.add('animate-fade-in');
-                });
-            });
-
-            // Handle mobile menu height on resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 1024) { // lg breakpoint
-                    document.body.style.overflow = '';
-                    if (mobileNav) {
-                        mobileNav.classList.add('hidden');
-                    }
-                }
-            });
         });
     </script>
-    <style>
-        /* Navigation and Mobile Menu */
-        .nav-link .fa-chevron-down {
-            transition: transform 0.2s;
-        }
-
-        /* Hamburger Menu Icon */
-        #mobileMenuButton svg {
-            transition: transform 0.3s ease;
-        }
-        
-        #mobileMenuButton[aria-expanded="true"] svg {
-            transform: rotate(90deg);
-        }
-        #serviceSubmenu {
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* Navigation Hover Menu */
-        .group {
-            position: relative;
-        }
-
-        .group:hover .group-hover\:block {
-            display: block;
-            opacity: 1;
-            transform: translateY(0) translateX(-50%);
-            pointer-events: auto;
-            transition-delay: 100ms;
-        }
-
-        .group:not(:hover) .group-hover\:block {
-            transition-delay: 100ms;
-        }
-
-        .group:hover .group-hover\:rotate-180 {
-            transform: rotate(180deg);
-        }
-
-        /* Navigation Links */
-        .nav-link {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem;
-            transition: all 0.2s ease;
-            position: relative;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: #2563eb;
-        }
-
-        /* Dropdown Menu */
-        .group-hover\:block {
-            opacity: 0;
-            transform: translateY(-10px) translateX(-50%);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Dropdown Items */
-        .dropdown-item {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            margin: 0.25rem 0;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f0f9ff;
-            color: #2563eb;
-            transform: translateX(4px);
-        }
-
-        .dropdown-item:hover i {
-            color: #2563eb;
-            transform: scale(1.1);
-            transition: all 0.2s ease;
-        }
-
-        /* Section Headers */
-        .text-xs.font-semibold.text-gray-400.uppercase {
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-        }
-    </style>
 </body>
 </html>
