@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Str;
+@endphp
+
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -13,14 +17,15 @@
                     Urus Legalitas Usaha Tanpa Ribet
                 </h1>
                 <p class="text-xl text-blue-100 mb-8 leading-relaxed">
-                    Kami bantu Anda mendirikan badan usaha, mengurus perizinan, hingga dokumen hukum dengan proses yang cepat, transparan, dan terpercaya.
+                Legalitas Usaha yang Rapi, Cepat, dan Terjamin. -
+                Legalify ID mendampingi Anda dalam pendirian badan usaha, pengurusan izin, hingga pembuatan dokumen hukum—dengan layanan profesional, transparan, dan tepat waktu.
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <a href="{{ route('services') }}" class="btn btn-primary">
                         Mulai Sekarang
                     </a>
                     <a href="{{ route('contact') }}" class="btn btn-outline text-white border-white hover:bg-white/10">
-                        Konsultasi Gratis
+                        Konsultasi
                     </a>
                 </div>
             </div>
@@ -88,8 +93,32 @@
             <h2 class="text-3xl font-bold text-white mb-4">Siap Memulai?</h2>
             <p class="text-xl text-blue-100 mb-8">Konsultasikan kebutuhan legal bisnis Anda dengan tim kami</p>
             <a href="{{ route('contact') }}" class="btn btn-primary bg-white text-blue-600 hover:bg-blue-50">
-                Konsultasi Gratis
+                Konsultasi
             </a>
+        </div>
+    </div>
+</section>
+<!-- Blog Section -->
+<section class="py-20 bg-gray-50">
+    <div class="container max-w-6xl mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Blog Terbaru</h2>
+            <p class="text-gray-600">Berita dan artikel terbaru seputar legalitas usaha dan bisnis</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            @foreach($latestBlogs as $blog)
+                <div class="bg-white rounded-lg shadow p-6 flex flex-col">
+                    <h3 class="text-xl font-semibold mb-2">
+                        <a href="{{ route('blog.show', $blog->id) }}" class="hover:text-blue-600">
+                            {{ $blog->title }}
+                        </a>
+                    </h3>
+                    <p class="text-gray-600 flex-grow">{{ Str::limit(strip_tags($blog->content), 120) }}</p>
+                    <a href="{{ route('blog.show', $blog->id) }}" class="mt-4 text-blue-600 font-medium hover:underline self-start">
+                        Baca Selengkapnya
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>

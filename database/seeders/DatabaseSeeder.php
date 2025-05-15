@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
             LangkahMendirikanPtSeeder::class,
             VirtualOfficeSeeder::class,
             KesalahanFatalSeeder::class,
-            PtPeroranganSeeder::class
+            PtPeroranganSeeder::class,
+            ServiceCategorySeeder::class,
+            ServiceSeeder::class
         ]);
     }
 }

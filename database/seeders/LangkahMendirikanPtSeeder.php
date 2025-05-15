@@ -64,7 +64,7 @@ class LangkahMendirikanPtSeeder extends Seeder
                 <h3>Kenapa Sebaiknya Pakai Jasa Profesional?</h3>
                 <p>Melihat langkah-langkah di atas, mungkin terasa sedikit melelahkan. Menggunakan jasa profesional seperti Legalify.id punya banyak keuntungan: Hemat Waktu & Tenaga, Hindari Kesalahan, Proses Lebih Cepat, Kepatuhan Terjamin.</p>
 
-                <p>Siap Wujudkan PT Impian Anda di Tahun 2025? Dapatkan penawaran paket pendirian PT terbaik dari kami! Hubungi Kami Sekarang untuk Konsultasi GRATIS!</p>
+                <p>Siap Wujudkan PT Impian Anda di Tahun 2025? Dapatkan penawaran paket pendirian PT terbaik dari kami! Hubungi Kami Sekarang untuk Konsultasi!</p>
             ',
             'category' => 'Business Law',
             'created_at' => '2025-04-22 00:00:00'

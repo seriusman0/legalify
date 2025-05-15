@@ -56,6 +56,30 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item {{ request()->routeIs('admin.service*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->routeIs('admin.service*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-briefcase"></i>
+              <p>
+                Layanan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.services.index') }}" class="nav-link {{ request()->routeIs('admin.services.index') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Layanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.service-categories.index') }}" class="nav-link {{ request()->routeIs('admin.service-categories.*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kategori Layanan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

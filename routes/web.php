@@ -6,8 +6,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\{
+    ProfileController,
+    MessageController,
+    ServiceController as AdminServiceController,
+    ServiceCategoryController as AdminServiceCategoryController
+};
 use Illuminate\Support\Facades\Route;
 
 // Temporary route to check admin URL key
@@ -49,5 +53,11 @@ Route::prefix('dashboard-' . config('admin.url_key', 'secure'))->middleware(['au
         Route::patch('/{message}/mark-as-read', [MessageController::class, 'markAsRead'])->name('mark-as-read');
         Route::patch('/{message}/mark-as-unread', [MessageController::class, 'markAsUnread'])->name('mark-as-unread');
         Route::delete('/{message}', [MessageController::class, 'destroy'])->name('destroy');
+    });
+
+    // Service management routes
+    Route::prefix('services')->name('admin.')->group(function () {
+        Route::resource('service-categories', AdminServiceCategoryController::class);
+        Route::resource('services', AdminServiceController::class);
     });
 });

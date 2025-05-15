@@ -64,6 +64,7 @@ return [
         
         // Third Party Service Providers...
         Spatie\Permission\PermissionServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
     ],
 
     /*
