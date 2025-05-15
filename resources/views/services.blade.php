@@ -8,16 +8,14 @@
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="container relative z-10">
         <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-4xl font-bold text-white mb-6">Solusi Legalitas Bisnis Terpercaya</h1>
-            <p class="text-xl text-blue-100 mb-8">Layanan pendirian dan perizinan usaha yang disesuaikan dengan kebutuhan Anda</p>
-            
+            <h1 class="text-4xl font-bold text-white mb-6">Berbagai Paket Pilih paket terbaik untuk bisnis anda</h1>
         </div>
     </div>
 </section>
 
 <!-- Services Section -->
 <section class="py-20">
-    <div class="container">
+    <div class="container max-w-6xl mx-auto px-4">
         @if(session('error'))
         <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
             <div class="flex">
@@ -31,119 +29,98 @@
         </div>
         @endif
 
-        <!-- Service Categories -->
-        <div class="space-y-16">
+        <!-- Service Categories Tabs -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
             @foreach($services as $service)
-                @if(isset($service['is_process']) && $service['is_process'])
-                    <!-- Process Section -->
-                    <div class="bg-gray-50 rounded-3xl p-12">
-                        <div class="text-center max-w-3xl mx-auto mb-12">
-                            <h2 class="text-3xl font-bold text-gray-900 mb-4">Alur Proses Pendirian Badan Usaha</h2>
-                            <p class="text-lg text-gray-600">Proses mudah dan transparan dalam 6 langkah sederhana</p>
-                        </div>
-                        <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-8">
-                            @foreach($service['steps'] as $step)
-                                @php
-                                    $stepNumber = substr($step['title'], 0, 1);
-                                    $stepTitle = substr($step['title'], strpos($step['title'], '.') + 2);
-                                    $icon = match($stepNumber) {
-                                        '1' => 'fa-comments',
-                                        '2' => 'fa-search',
-                                        '3' => 'fa-file-signature',
-                                        '4' => 'fa-pen-fancy',
-                                        '5' => 'fa-stamp',
-                                        '6' => 'fa-id-card',
-                                        default => 'fa-circle'
-                                    };
-                                @endphp
-                                <div class="relative">
-                                    @if(!$loop->last)
-                                        <div class="hidden lg:block absolute top-8 left-full w-full border-t-2 border-dashed border-blue-200"></div>
-                                    @endif
-                                    <div class="bg-white rounded-xl p-6 text-center relative z-10">
-                                        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <i class="fas {{ $icon }} text-xl"></i>
-                                        </div>
-                                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                                            {{ $stepNumber }}
-                                        </div>
-                                        <h3 class="font-semibold text-gray-900">{{ $stepTitle }}</h3>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @elseif(!isset($service['is_process']))
+                @if(!isset($service['is_process']) || $service['is_process'])
                     @continue
-                @else
-                    <!-- Service Category -->
-                    <div>
-                        <div class="flex items-center gap-4 mb-8">
-                            @php
-                                $categoryIcon = match($service['title']) {
-                                    'PT' => 'fa-building',
-                                    'PT Perorangan' => 'fa-user-tie',
-                                    'PT PMA' => 'fa-globe',
-                                    'CV / Firma' => 'fa-handshake',
-                                    'Yayasan / Perkumpulan / Koperasi' => 'fa-users',
-                                    default => 'fa-briefcase'
-                                };
-                            @endphp
-                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">
-                                <i class="fas {{ $categoryIcon }} text-xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-900">{{ $service['title'] }}</h2>
-                                <p class="text-gray-600">Pilih paket yang sesuai dengan kebutuhan Anda</p>
-                            </div>
-                        </div>
-                        
-                        <div class="grid md:grid-cols-3 gap-8">
-                            @foreach($service['packages'] as $package)
-                                <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden">
-                                    @if($package['type'] === 'Premium')
-                                        <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-center py-1 text-sm font-medium">
-                                            Terpopuler
-                                        </div>
-                                    @endif
-                                    <div class="p-8">
-                                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['type'] }}</h3>
-                                        <p class="text-gray-600 mb-6">{{ $package['description'] }}</p>
-                                        <div class="mb-8">
-                                            <div class="text-gray-500 line-through">{{ $package['price_range'] }}</div>
-                                            <div class="text-3xl font-bold text-blue-600">{{ $package['final_price'] }}</div>
-                                        </div>
-                                        <ul class="space-y-4 mb-8">
-                                            @foreach($package['main_features'] as $feature)
-                                                <li class="flex items-start gap-3">
-                                                    <i class="fas fa-check-circle text-blue-600 mt-1"></i>
-                                                    <span class="text-gray-600">{{ $feature }}</span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                        <a href="#" class="btn btn-primary w-full justify-center">Pilih Paket</a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
                 @endif
+                <button 
+                    onclick="showCategory('{{ str_replace(' ', '', $service['title']) }}')"
+                    class="tab-button px-6 py-2 rounded-full text-sm font-medium {{ $loop->first ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 border border-blue-100' }} hover:bg-blue-500 hover:text-white transition-all duration-200">
+                    {{ $service['title'] }}
+                </button>
+            @endforeach
+        </div>
+
+        <!-- Service Categories Content -->
+        <div>
+            @foreach($services as $service)
+                @if(!isset($service['is_process']) || $service['is_process'])
+                    @continue
+                @endif
+                <div id="{{ str_replace(' ', '', $service['title']) }}" class="service-category {{ !$loop->first ? 'hidden' : '' }}">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        @foreach($service['packages'] as $package)
+                            <div class="bg-white rounded-2xl border border-gray-100 hover:border-blue-500 transition-all duration-200 overflow-hidden">
+                                <!-- Package Label -->
+                                <div class="text-center py-2 {{ $package['type'] === 'Premium' ? 'bg-blue-500 text-white' : 'bg-gray-50' }}">
+                                    {{ $package['type'] }}
+                                </div>
+                                
+                                <!-- Package Content -->
+                                <div class="p-6">
+                                    <!-- Price -->
+                                    <div class="mb-6">
+                                        <div class="flex items-baseline justify-center">
+                                            <span class="text-lg mr-1">Rp</span>
+                                            @if(preg_match('/(\d+)(?:\s*jt|\s*juta)/', $package['final_price'], $matches))
+                                                <span class="text-6xl font-bold">{{ $matches[1] }}</span>
+                                                <span class="text-2xl ml-1">jt</span>
+                                            @else
+                                                <span class="text-6xl font-bold">{{ $package['final_price'] }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- Features -->
+                                    <ul class="space-y-4 mb-8 min-h-[280px]">
+                                        @foreach($package['main_features'] as $feature)
+                                            <li class="flex items-start gap-3">
+                                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                                <span class="text-gray-600 text-sm">{{ $feature }}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                    <!-- Action Button -->
+                                    <a href="https://wa.me/6285173010820?text=Halo%20Legalify%2C%20saya%20tertarik%20dengan%20paket%20{{ urlencode($package['type']) }}%20untuk%20{{ urlencode($service['title']) }}" 
+                                       class="block w-full py-3 text-center rounded-lg {{ $package['type'] === 'Premium' ? 'bg-blue-500 text-white hover:bg-blue-600' : 'border border-blue-500 text-blue-500 hover:bg-blue-50' }} transition-all duration-200"
+                                       target="_blank">
+                                        Pilih Paket
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gray-50">
-    <div class="container">
-        <div class="text-center max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Butuh Bantuan?</h2>
-            <p class="text-lg text-gray-600 mb-8">Tim kami siap membantu Anda memilih solusi yang tepat untuk bisnis Anda</p>
-            <a href="{{ route('contact') }}" class="btn btn-primary">
-                <i class="fas fa-paper-plane mr-2"></i>
-                Hubungi Kami
-            </a>
-        </div>
-    </div>
-</section>
+@push('scripts')
+<script>
+function showCategory(categoryId) {
+    // Hide all categories
+    document.querySelectorAll('.service-category').forEach(category => {
+        category.classList.add('hidden');
+    });
+    
+    // Show selected category
+    document.getElementById(categoryId).classList.remove('hidden');
+    
+    // Update active tab
+    document.querySelectorAll('.tab-button').forEach(tab => {
+        if (tab.getAttribute('onclick').includes(categoryId)) {
+            tab.classList.remove('bg-white', 'text-blue-500', 'border');
+            tab.classList.add('bg-blue-500', 'text-white');
+        } else {
+            tab.classList.remove('bg-blue-500', 'text-white');
+            tab.classList.add('bg-white', 'text-blue-500', 'border', 'border-blue-100');
+        }
+    });
+}
+</script>
+@endpush
 @endsection
