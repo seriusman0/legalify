@@ -12,7 +12,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                 @if(Auth::user()->profile_picture)
-                    <img src="{{ asset('.storage/' . Auth::user()->profile_picture) }}" 
+                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" 
                          alt="Profile Picture" 
                          class="img-circle elevation-2"
                          style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;">

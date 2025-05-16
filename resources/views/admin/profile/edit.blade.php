@@ -35,7 +35,7 @@
                                 <div class="form-group text-center mb-4">
                                     <div class="mb-3">
                                         @if($user->profile_picture)
-                                            <img src="{{ asset('.storage/' . $user->profile_picture) }}" 
+                                            <img src="{{ asset('storage/' . $user->profile_picture) }}" 
                                                  alt="Profile Picture" 
                                                  class="img-circle elevation-2"
                                                  style="width: 150px; height: 150px; object-fit: cover;">
