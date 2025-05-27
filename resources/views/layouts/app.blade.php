@@ -264,9 +264,9 @@
             
             <hr class="my-8 border-gray-200">
             
-            <div class="text-left text-gray-600 w-full max-w-full">
-                <p>&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
-            </div>
+        <div class="text-justify text-gray-600 w-full max-w-full">
+            <p>&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
+        </div>
         </div>
     </footer>
 

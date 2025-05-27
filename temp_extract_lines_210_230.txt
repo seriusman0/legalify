@@ -1,0 +1,58 @@
+
+<footer class="bg-white border-t">
+    <div class="py-16 px-8 w-full max-w-full mx-auto">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="space-y-6">
+                <img src="{{ asset('assets/icons/legalifylogoblack.png') }}" alt="Legalify" class="h-10">
+                <p class="text-gray-600">Legalify ID adalah partner legal terpercaya untuk UMKM, startup, dan pengusaha perorangan. Kami hadir untuk memastikan pendirian usaha, perizinan, dan dokumen hukum Anda terselesaikan secara profesional, efisien, dan tanpa hambatan.</p>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/legalify.id" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@legalify.id" class="social-link" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="footer-title">Company</h5>
+                <ul class="footer-links">
+                    <li><a href="{{ route('services') }}">Services</a></li>
+                    <li><a href="{{ route('user.blog') }}">Blog</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="footer-title">Services</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Pendirian PT</a></li>
+                    <li><a href="#">Pendirian CV</a></li>
+                    <li><a href="#">Perizinan Usaha</a></li>
+                    <li><a href="#">Merek Dagang</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="footer-title">Contact</h5>
+                <ul class="footer-links">
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-envelope text-gray-400"></i>
+                        support@legalify.id
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        +62 881-6814-751
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <hr class="my-8 border-gray-200">
+        
+        <div class="text-left text-gray-600 w-full max-w-full">
+            <p>&copy; {{ date('Y') }} Legalify. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
